@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 101f7b31c97523d4c8c863d95c9ba52e
+timeCreated: 1509558035
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50666
+  packageName: Resource Bubble
+  packageVersion: 1.9
+  assetPath: Assets/ResourceGlobes/Scripts/GlobeAnimation.cs
+  uploadId: 260674

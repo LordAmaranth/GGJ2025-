@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bdc541de1f636fa4482162aaf7bf1297
+timeCreated: 1463912223
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50666
+  packageName: Resource Bubble
+  packageVersion: 1.9
+  assetPath: Assets/ResourceGlobes/Demo/Scenes/DemoSpritres.unity
+  uploadId: 260674

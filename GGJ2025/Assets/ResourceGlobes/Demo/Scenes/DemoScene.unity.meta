@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6ad30ed5122383e418e55ea0bc6f81b0
+timeCreated: 1445097931
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50666
+  packageName: Resource Bubble
+  packageVersion: 1.9
+  assetPath: Assets/ResourceGlobes/Demo/Scenes/DemoScene.unity
+  uploadId: 260674

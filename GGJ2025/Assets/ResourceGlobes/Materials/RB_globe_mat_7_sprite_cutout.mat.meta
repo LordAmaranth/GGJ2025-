@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c280349a30d6ecf4497f9fff54c92384
+timeCreated: 1459102287
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50666
+  packageName: Resource Bubble
+  packageVersion: 1.9
+  assetPath: Assets/ResourceGlobes/Materials/RB_globe_mat_7_sprite_cutout.mat
+  uploadId: 260674

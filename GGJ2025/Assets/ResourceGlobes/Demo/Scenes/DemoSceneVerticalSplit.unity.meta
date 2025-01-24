@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b962bf71b1c666147bbeec99d4dd3198
+timeCreated: 1462548261
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50666
+  packageName: Resource Bubble
+  packageVersion: 1.9
+  assetPath: Assets/ResourceGlobes/Demo/Scenes/DemoSceneVerticalSplit.unity
+  uploadId: 260674
