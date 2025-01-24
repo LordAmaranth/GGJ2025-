@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3150d702702b62444a25e3fc8bb1dd14
+timeCreated: 1462548365
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50666
+  packageName: Resource Bubble
+  packageVersion: 1.9
+  assetPath: Assets/ResourceGlobes/Prefabs/RB_PREFAB_VSPLIT.prefab
+  uploadId: 260674

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 61955665ece24af4895066d3fad4c01b
+timeCreated: 1509557843
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50666
+  packageName: Resource Bubble
+  packageVersion: 1.9
+  assetPath: Assets/ResourceGlobes/Mobile/CutOutImage.controller
+  uploadId: 260674

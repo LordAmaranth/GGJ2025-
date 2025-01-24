@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2d7ae2a34366b2744888b48c7f7f8b30
+timeCreated: 1462548286
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50666
+  packageName: Resource Bubble
+  packageVersion: 1.9
+  assetPath: Assets/ResourceGlobes/Prefabs/RB_PREFAB_VSPLIT_with_camera.prefab
+  uploadId: 260674

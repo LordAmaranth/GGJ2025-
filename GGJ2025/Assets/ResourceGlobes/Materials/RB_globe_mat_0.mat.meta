@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7a49b0cbe5d42604cb72977271c57ea5
+timeCreated: 1448320329
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50666
+  packageName: Resource Bubble
+  packageVersion: 1.9
+  assetPath: Assets/ResourceGlobes/Materials/RB_globe_mat_0.mat
+  uploadId: 260674

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b8dad60ee56a9494ab8241f243948539
+timeCreated: 1448393149
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50666
+  packageName: Resource Bubble
+  packageVersion: 1.9
+  assetPath: Assets/ResourceGlobes/Prefabs/RB_PREFAB_with_camera.prefab
+  uploadId: 260674

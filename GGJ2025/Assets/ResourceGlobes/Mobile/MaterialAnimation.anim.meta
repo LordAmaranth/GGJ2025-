@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: e8ef4df250c02034ea47df7cecd03a40
+timeCreated: 1509557842
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50666
+  packageName: Resource Bubble
+  packageVersion: 1.9
+  assetPath: Assets/ResourceGlobes/Mobile/MaterialAnimation.anim
+  uploadId: 260674

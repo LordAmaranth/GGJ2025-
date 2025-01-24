@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 45b0571100053f443b86711114b4ab16
+timeCreated: 1445097931
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50666
+  packageName: Resource Bubble
+  packageVersion: 1.9
+  assetPath: Assets/ResourceGlobes/Demo/Scenes/DemoSceneAnimated_Mobile.unity
+  uploadId: 260674

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 57ca369f5879e1345bbeae3dadef1b4a
+timeCreated: 1446057272
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50666
+  packageName: Resource Bubble
+  packageVersion: 1.9
+  assetPath: Assets/ResourceGlobes/Shaders/RB_GlobeShader.shader
+  uploadId: 260674

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1a774470ad5ed6a4b87c2dac2f371526
+timeCreated: 1462549881
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 50666
+  packageName: Resource Bubble
+  packageVersion: 1.9
+  assetPath: Assets/ResourceGlobes/Demo/Presentation/RB_decoration_bar_mat_8.mat
+  uploadId: 260674
