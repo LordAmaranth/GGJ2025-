@@ -45,7 +45,7 @@ public class Bubble : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other) {
         // シャボン玉を膨らます時の当たり判定
         if (other.gameObject.CompareTag("Straw")) {
-            isAirColliding = true; // Airとの接触を開始
+            isAirColliding = true;
             animator.SetTrigger("IsAir");
         }
 
@@ -58,10 +58,11 @@ public class Bubble : MonoBehaviour {
     private void OnTriggerExit2D(Collider2D other) {
         if (other.gameObject.CompareTag("Player")) {
             SetDeformAnimationExit();
+            isAirColliding = false; 
         }
         // シャボン玉を膨らます時の当たり判定
         if (other.gameObject.CompareTag("Straw")) {
-            isAirColliding = false; // Strawとの接触が終了
+            isAirColliding = false;
             animator.SetTrigger("Idle");
         }
     }
