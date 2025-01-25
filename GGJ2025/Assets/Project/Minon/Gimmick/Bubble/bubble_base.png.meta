@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: 8ebe725590d66430a914f7d927aea4d5
+guid: c7e8d0d72b6c4e9469561b562a68ba73
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3101990464900556527
-    second: title_test_0
-  - first:
-      213: -8293060347016927367
-    second: title_test_1
-  - first:
-      213: 5916370126204430207
-    second: title_test_2
-  - first:
-      213: 9006086556027204740
-    second: title_test_3
+      213: -7242281703089242505
+    second: bubble_base_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -106,46 +97,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: tvOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -161,35 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: title_test_0
+      name: bubble_base_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 16
-        width: 226
-        height: 248
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 11914f27b1483f4d0800000000000000
-      internalID: -3101990464900556527
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: title_test_1
-      rect:
-        serializedVersion: 2
-        x: 214
         y: 0
-        width: 216
-        height: 253
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -198,52 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 977ad2b8d8129ec80800000000000000
-      internalID: -8293060347016927367
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: title_test_2
-      rect:
-        serializedVersion: 2
-        x: 433
-        y: 11
-        width: 227
-        height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f77e524984b2b1250800000000000000
-      internalID: 5916370126204430207
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: title_test_3
-      rect:
-        serializedVersion: 2
-        x: 661
-        y: 12
-        width: 189
-        height: 226
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4843c64a10c0cfc70800000000000000
-      internalID: 9006086556027204740
+      spriteID: 77efd0c892f3e7b90800000000000000
+      internalID: -7242281703089242505
       vertices: []
       indices: 
       edges: []
@@ -261,11 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      title_test_0: -3101990464900556527
-      title_test_1: -8293060347016927367
-      title_test_2: 5916370126204430207
-      title_test_3: 9006086556027204740
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
