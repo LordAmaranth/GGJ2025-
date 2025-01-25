@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a5a7e1b992447438fa558bf5c41fcd, type: 3}
   m_Name: BubbleSettings
   m_EditorClassIdentifier: 
-  maxScale: 2
+  maxScale: 7
   scaleIncreaseSpeed: 1
-  upSpeed: 0.1
+  upSpeed: 0.3

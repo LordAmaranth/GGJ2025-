@@ -29,6 +29,10 @@ public class Player : MonoBehaviour {
     }
 
     void Update() {
+        if (transform.position.y < -30) {
+            transform.position = new(transform.position.x, 20);
+        }
+
         if (myRigidBody.linearVelocityY < 0) {
             ChangeJumpState(JumpState.Falling);
         }
@@ -54,7 +58,7 @@ public class Player : MonoBehaviour {
             return;
         }
 
-        if (collision.GetContact(0).normal == Vector2.up) {
+        if (Vector3.Angle(collision.GetContact(0).normal, Vector2.up) < 15) {
             ChangeJumpState(JumpState.Grounded);
         }
     }
