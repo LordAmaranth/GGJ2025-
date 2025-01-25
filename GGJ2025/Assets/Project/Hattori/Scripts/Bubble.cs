@@ -55,13 +55,14 @@ public class Bubble : MonoBehaviour
         if (other.gameObject.CompareTag("Air"))
         {
             isAirColliding = true; // Airとの接触を開始
+            animator.SetTrigger("isAir");
         }
 
-        // シャボン玉をプスする時のの当たり判定
-        // if (other.gameObject.CompareTag("Attack"))
-        // {
-            
-        // }
+        //シャボン玉をプスする時のの当たり判定
+        if (other.gameObject.CompareTag("Weapon"))
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -74,6 +75,7 @@ public class Bubble : MonoBehaviour
         if (other.gameObject.CompareTag("Air"))
         {
             isAirColliding = false; // Airとの接触が終了
+            animator.SetTrigger("0");
         }
     }
 

@@ -8,6 +8,7 @@ TagManager:
   - TextUI
   - TxtUI
   - Air
+  - Weapon
   layers:
   - Default
   - TransparentFX
