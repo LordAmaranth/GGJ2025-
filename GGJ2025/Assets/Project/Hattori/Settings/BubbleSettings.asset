@@ -15,3 +15,5 @@ MonoBehaviour:
   maxScale: 7
   scaleIncreaseSpeed: 1
   upSpeed: 1
+  destroyHeight: 10
+  destroyWidth: 20

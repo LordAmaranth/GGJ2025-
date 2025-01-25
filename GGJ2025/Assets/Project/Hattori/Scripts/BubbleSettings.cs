@@ -6,4 +6,6 @@ public class BubbleSettings : ScriptableObject {
     public float scaleIncreaseSpeed = 1f; // スケールの増加速度
     public float upSpeed = 0.1f; // 上昇速度
     public float WindStrength = 1;
+    public float destroyHeight = 10f; // 達したらDestroyされる高さ
+    public float destroyWidth = 20f; // 達したらDestroyされる幅
 }

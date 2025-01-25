@@ -48,6 +48,11 @@ public class Bubble : MonoBehaviour {
                 windSources.Remove(windSource);
             }
         }
+        
+        // 一定の高さまたは横方向の限界を超えたらDestroy
+        if (transform.position.y > settings.destroyHeight || Mathf.Abs(transform.position.x) > settings.destroyWidth) {
+            Destroy(gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
