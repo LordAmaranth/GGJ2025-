@@ -73,7 +73,7 @@ public class Player : MonoBehaviour {
             case JumpState.Falling:
                 animator.SetBool("Falling", true);
                 animator.SetBool("Jump", false);
-                animator.ResetTrigger("Landed");
+                animator.ResetTrigger("Jump");
                 break;
             default:
                 throw new System.Exception($"Unhandled jump state {newJumpState}!");
