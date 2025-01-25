@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 using GGJ.Common;
 
 namespace Project.GGJ2025
@@ -7,7 +8,10 @@ namespace Project.GGJ2025
     public class ZoomCamera2D : MonoBehaviour
     {
         public List<Transform> targets;
-        [SerializeField] Vector2 offset = new Vector2(1, 1);
+        [SerializeField]
+        private Vector2 offset = new Vector2(1, 1);
+
+        [SerializeField] private Vector2 offsetVec = new Vector2(0, 20);
 
         private float screenAspect = 0;
         private Camera _camera = null;
@@ -18,9 +22,12 @@ namespace Project.GGJ2025
         public float maxZoom = 60.0f;
         private Vector3 velocity;
         private float fvelocity;
+        private Vector3 fVec;
         
         private float defaultOrthographicSize = 5;
         private Vector3 defaultposition = Vector3.zero;
+        public Vector2 minBounds;
+        public Vector2 maxBounds;
         
         void Awake()
         {
@@ -54,7 +61,13 @@ namespace Project.GGJ2025
             }
             // 2点間の中心点からカメラの位置を更新
             Vector3 center = Vector3.Lerp(target.min.position, target.max.position, 0.5f);
+            center.y += offset.y;
             var newPosition = center + Vector3.forward * -1;
+            // カメラの位置を制限
+            var orthographicSize = _camera.orthographicSize;
+            var aspect = _camera.aspect;
+            newPosition.x = Mathf.Clamp(newPosition.x, minBounds.x + orthographicSize * aspect, maxBounds.x - orthographicSize * aspect);
+            newPosition.y = Mathf.Clamp(newPosition.y, minBounds.y + orthographicSize, maxBounds.y - orthographicSize);
             transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref velocity, smoothTime);
         }
 
@@ -98,10 +111,19 @@ namespace Project.GGJ2025
                     minZoom,
                     maxZoom
                 );
+                
+                // カメラの位置を制御
+                var nowPosition = transform.position;
+                var orthographicSize = _camera.orthographicSize;
+                var aspect = _camera.aspect;
+                nowPosition.x = Mathf.Clamp(nowPosition.x, minBounds.x + orthographicSize * aspect, maxBounds.x - orthographicSize * aspect);
+                nowPosition.y = Mathf.Clamp(nowPosition.y, minBounds.y + orthographicSize, maxBounds.y - orthographicSize);
+                // transform.position = nowPosition;
+                transform.position = Vector3.SmoothDamp(transform.position, nowPosition, ref fVec, smoothTime);
                 return;
             }
             // ２点間のベクトルを取得
-            Vector3 targetsVector = AbsPositionDiff(target.min, target.max) + (Vector3)offset;
+            Vector3 targetsVector = AbsPositionDiff(target.min, target.max) + (Vector3)offsetVec;
 
             // アスペクト比が縦長ならyの半分、横長ならxとアスペクト比でカメラのサイズを更新
             float targetsAspect = targetsVector.y / targetsVector.x;
@@ -120,6 +142,14 @@ namespace Project.GGJ2025
                 minZoom,
                 maxZoom
             );
+            
+            // カメラの位置を制御
+            var nowPosition2 = transform.position;
+            var orthographicSize2 = _camera.orthographicSize;
+            var aspect2 = _camera.aspect;
+            nowPosition2.x = Mathf.Clamp(nowPosition2.x, minBounds.x + orthographicSize2 * aspect2, maxBounds.x - orthographicSize2 * aspect2);
+            nowPosition2.y = Mathf.Clamp(nowPosition2.y, minBounds.y + orthographicSize2, maxBounds.y - orthographicSize2);
+            transform.position = Vector3.SmoothDamp(transform.position, nowPosition2, ref fVec, smoothTime);
         }
 
         Vector3 AbsPositionDiff(Transform target1, Transform target2)
