@@ -540,7 +540,7 @@ MonoBehaviour:
     m_ActionId: 1f834175-6cb0-42bf-a1a2-ec198b69e459
     m_ActionName: 'Player/BlowBubble[/XInputControllerWindows1/buttonEast,/XInputControllerWindows/buttonEast,/XInputControllerWindows2/buttonEast,/XInputControllerWindows3/buttonEast,/XInputControllerWindows4/buttonEast]'
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Gamepad
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

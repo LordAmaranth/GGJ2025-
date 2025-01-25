@@ -3,20 +3,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerManager : MonoBehaviour {
-    [SerializeField] private ZoomCamera2D gameCamera;
     public static int playerId = 0;
 
     public void OnPlayerJoined(PlayerInput playerInput) {
-        if (gameCamera == null) {
-            return;
-        }
-        gameCamera.targets.Add(playerInput.transform);
+        DataStore.Instance.AddPlayer(playerInput.GetComponent<Player>());
     }
 
     public void OnPlayerLeft(PlayerInput playerInput) {
-        if (gameCamera == null) {
-            return;
-        }
-        gameCamera.targets.Remove(playerInput.transform);
+        DataStore.Instance.RemovePlayer(playerInput.GetComponent<Player>());
     }
 }

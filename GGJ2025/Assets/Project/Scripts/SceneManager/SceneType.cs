@@ -7,9 +7,7 @@ namespace GGJ.Common
 	public enum SceneType
 	{
 		None = -1,
-		Title,
 		Game,
-		Result,
 		Max,
 	}
 }
