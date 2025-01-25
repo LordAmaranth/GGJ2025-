@@ -11,12 +11,6 @@ public class Player : MonoBehaviour {
 
     [SerializeField] private PlayerConfig config;
     [SerializeField] private Rigidbody2D myRigidBody;
-    [SerializeField] private Animator animator;
-    [SerializeField] private GameObject visualsRoot;
-    [SerializeField] private ParticleSystem windParticles;
-    [SerializeField] private GameObject weapon;
-    [SerializeField] private GameObject straw;
-    [SerializeField] private Collider2D windBox;
     [SerializeField] private AudioSource[] soundJump;
     [SerializeField] private List<Collider2D> windSources = new();
 
@@ -25,13 +19,19 @@ public class Player : MonoBehaviour {
     private bool isBlowingBubble;
     private float movementHorizontalSpeed;
     private JumpState jumpState;
+    private PlayerVisuals visualsRoot;
 
-    private void Start() {
+    private void Awake() {
+        GameObject a = Instantiate(config.PlayerVisuals[PlayerManager.playerId % config.PlayerVisuals.Length], transform);
+        visualsRoot = a.GetComponent<PlayerVisuals>();
+        PlayerManager.playerId++;
+
+        visualsRoot.transform.localPosition = Vector3.zero;
+        visualsRoot.Weapon.SetActive(false);
+        visualsRoot.Straw.SetActive(false);
+        visualsRoot.WindBox.enabled = false;
+        visualsRoot.WindParticles.gameObject.SetActive(false);
         ChangeJumpState(JumpState.Falling);
-        weapon.SetActive(false);
-        straw.SetActive(false);
-        windBox.enabled = false;
-        windParticles.gameObject.SetActive(false);
     }
 
     void Update() {
@@ -53,10 +53,10 @@ public class Player : MonoBehaviour {
         myRigidBody.linearVelocity = new Vector2(movementHorizontalSpeed * config.MovementSpeed, myRigidBody.linearVelocity.y);
         if (movementHorizontalSpeed != 0) {
             visualsRoot.transform.localScale = new Vector2(movementHorizontalSpeed < 0 ? 1 : -1, 1);
-            windParticles.transform.localScale = new Vector2(movementHorizontalSpeed < 0 ? 1 : -1, 1);
+            visualsRoot.WindParticles.transform.localScale = new Vector2(movementHorizontalSpeed < 0 ? 1 : -1, 1);
         }
 
-        animator.SetBool("Walk", movementHorizontalSpeed != 0 && jumpState == JumpState.Grounded);
+        visualsRoot.Animator.SetBool("Walk", movementHorizontalSpeed != 0 && jumpState == JumpState.Grounded);
 
         for (int i = windSources.Count - 1; i >= 0; i--) {
             Collider2D windSource = windSources[i];
@@ -114,19 +114,19 @@ public class Player : MonoBehaviour {
 
         switch (newJumpState) {
             case JumpState.Grounded:
-                animator.SetTrigger("Landed");
-                animator.SetBool("Jump", false);
-                animator.SetBool("Falling", false);
+                visualsRoot.Animator.SetTrigger("Landed");
+                visualsRoot.Animator.SetBool("Jump", false);
+                visualsRoot.Animator.SetBool("Falling", false);
                 break;
             case JumpState.Jumping:
-                animator.SetBool("Jump", true);
-                animator.SetBool("Falling", false);
-                animator.ResetTrigger("Landed");
+                visualsRoot.Animator.SetBool("Jump", true);
+                visualsRoot.Animator.SetBool("Falling", false);
+                visualsRoot.Animator.ResetTrigger("Landed");
                 break;
             case JumpState.Falling:
-                animator.SetBool("Falling", true);
-                animator.SetBool("Jump", false);
-                animator.ResetTrigger("Jump");
+                visualsRoot.Animator.SetBool("Falling", true);
+                visualsRoot.Animator.SetBool("Jump", false);
+                visualsRoot.Animator.ResetTrigger("Jump");
                 break;
             default:
                 throw new System.Exception($"Unhandled jump state {newJumpState}!");
@@ -159,7 +159,7 @@ public class Player : MonoBehaviour {
         if (holdingBlowButton && context.canceled) {
             isAttacking = false;
             holdingBlowButton = false;
-            animator.SetBool("BlowAir", false);
+            visualsRoot.Animator.SetBool("BlowAir", false);
             return;
         }
 
@@ -167,15 +167,15 @@ public class Player : MonoBehaviour {
             return;
         }
 
-        animator.ResetTrigger("Landed");
-        animator.SetTrigger("Attack");
+        visualsRoot.Animator.ResetTrigger("Landed");
+        visualsRoot.Animator.SetTrigger("Attack");
         isAttacking = true;
         holdingBlowButton = true;
     }
     public void OnBlowBubble(InputAction.CallbackContext context) {
         if (context.canceled) {
             isBlowingBubble = false;
-            straw.SetActive(false);
+            visualsRoot.Straw.SetActive(false);
             return;
         }
 
@@ -184,23 +184,23 @@ public class Player : MonoBehaviour {
         }
 
         isBlowingBubble = true;
-        straw.SetActive(true);
+        visualsRoot.Straw.SetActive(true);
 
     }
 
     public void OnAttackFinished() {
         if (holdingBlowButton) {
-            animator.SetBool("BlowAir", true);
+            visualsRoot.Animator.SetBool("BlowAir", true);
         }
         isAttacking = false;
     }
 
     public void OnBlowAirStart() {
-        windBox.enabled = true;
-        windParticles.gameObject.SetActive(true);
+        visualsRoot.WindBox.enabled = true;
+        visualsRoot.WindParticles.gameObject.SetActive(true);
     }
     public void OnBlowAirEnd() {
-        windBox.enabled = false;
-        windParticles.gameObject.SetActive(false);
+        visualsRoot.WindBox.enabled = false;
+        visualsRoot.WindParticles.gameObject.SetActive(false);
     }
 }

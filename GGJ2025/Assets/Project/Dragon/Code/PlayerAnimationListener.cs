@@ -1,7 +1,10 @@
 using UnityEngine;
 
 public class PlayerAnimationListener : MonoBehaviour {
-    [SerializeField] Player player;
+    Player player;
+    private void Awake() {
+        player = transform.parent.GetComponent<Player>();
+    }
 
     public void OnAttackFinished() {
         player.OnAttackFinished();
