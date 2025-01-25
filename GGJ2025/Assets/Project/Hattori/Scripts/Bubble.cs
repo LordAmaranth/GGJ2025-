@@ -3,18 +3,35 @@ using UnityEngine;
 public class Bubble : MonoBehaviour
 {
     private Animator animator;
-
+    private bool isAirColliding = false;
+    private Vector3 originalScale;
+    
+    public float maxScale = 2f; 
+    public float scaleIncreaseSpeed = 1f;
     public float upSpeed = 0.1f;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        originalScale = transform.localScale; // 初期サイズを保存
     }
 
     void Update()
     {
         // 上方向に移動
         transform.Translate(Vector3.up * upSpeed * Time.deltaTime);
+
+        // Airが当たっている間、スケールを大きくする
+        if (isAirColliding && transform.localScale.x < maxScale)
+        {
+            transform.localScale += Vector3.one * scaleIncreaseSpeed * Time.deltaTime;
+        }
+        // 最大スケールを超えないように制限
+        if (transform.localScale.x > maxScale)
+        {
+            transform.localScale = Vector3.one * maxScale;
+        }
+        
     }
     
     private void OnCollisionEnter2D(Collision2D collision)
@@ -35,10 +52,10 @@ public class Bubble : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         // シャボン玉を膨らます時の当たり判定
-        // if (other.gameObject.CompareTag("Air"))
-        // {
-            
-        // }
+        if (other.gameObject.CompareTag("Air"))
+        {
+            isAirColliding = true; // Airとの接触を開始
+        }
 
         // シャボン玉をプスする時のの当たり判定
         // if (other.gameObject.CompareTag("Attack"))
@@ -53,8 +70,12 @@ public class Bubble : MonoBehaviour
         {
             SetDeformAnimationExit();
         }
+        // シャボン玉を膨らます時の当たり判定
+        if (other.gameObject.CompareTag("Air"))
+        {
+            isAirColliding = false; // Airとの接触が終了
+        }
     }
-
 
     private void SetDeformAnimation(Vector2 localContactPoint)
     {

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      bubble_fresnel_0: -6348161144452528264
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

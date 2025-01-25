@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - TextUI
   - TxtUI
+  - Air
   layers:
   - Default
   - TransparentFX

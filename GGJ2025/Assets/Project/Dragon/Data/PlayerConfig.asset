@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerConfig
   m_EditorClassIdentifier: 
   <MovementSpeed>k__BackingField: 8
-  <JumpStartSpeed>k__BackingField: 20
-  <MaxAscendSpeed>k__BackingField: 30
+  <JumpStartSpeed>k__BackingField: 15
+  <MaxAscendSpeed>k__BackingField: 20
   <MaxFallSpeed>k__BackingField: 0.5
   <JumpHeldSpeed>k__BackingField: 4.5
