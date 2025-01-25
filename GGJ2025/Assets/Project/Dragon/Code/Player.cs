@@ -33,7 +33,7 @@ public class Player : MonoBehaviour {
             transform.position = new(transform.position.x, 20);
         }
 
-        if (myRigidBody.linearVelocityY < 0) {
+        if (myRigidBody.linearVelocityY < config.FallSpeedThreshold) {
             ChangeJumpState(JumpState.Falling);
         }
 
@@ -58,7 +58,8 @@ public class Player : MonoBehaviour {
             return;
         }
 
-        if (Vector3.Angle(collision.GetContact(0).normal, Vector2.up) < 15) {
+        float landAngle = Vector3.Angle(collision.GetContact(0).normal, Vector2.up);
+        if (landAngle < config.MaxLandAngle) {
             ChangeJumpState(JumpState.Grounded);
         }
     }
@@ -68,7 +69,6 @@ public class Player : MonoBehaviour {
             return;
         }
 
-        Debug.Log($"State Switch {newJumpState}");
         switch (newJumpState) {
             case JumpState.Grounded:
                 animator.SetTrigger("Landed");
