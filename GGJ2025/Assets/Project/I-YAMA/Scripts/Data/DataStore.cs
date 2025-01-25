@@ -2,10 +2,18 @@ using GGJ.Common;
 
 namespace Project.GGJ2025
 {
+    /// <summary>
+    /// データ共通化クラス
+    /// </summary>
     public class DataStore : SingletonMonoBehaviour<DataStore>
     {
-        public int PlayerLife = 3;
-        public int PlayerDefaultAttackPower = 10;
-        public int  BubbleMaxLife = 100;
+        public PlayerState PState = PlayerState.None;
+
+        protected override void Init()
+        {
+            base.Init();
+            gameObject.name += "(Singleton)";
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
 }

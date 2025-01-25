@@ -3,16 +3,6 @@ using UnityEngine;
 namespace Project.GGJ2025
 {
     /// <summary>
-    /// プレイヤー状態
-    /// </summary>
-    public enum PlayerState
-    {
-        None,
-        Alive,
-        Death
-    }
-    
-    /// <summary>
     /// プレイヤー
     /// </summary>
     public interface IPlayer

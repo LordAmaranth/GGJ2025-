@@ -1,4 +1,5 @@
 using GGJ.Common;
+using UnityEngine;
 
 namespace Project.GGJ2025
 {
@@ -6,7 +7,7 @@ namespace Project.GGJ2025
     {
         private void Start()
         {
-
+            Debug.Log(DataStore.Instance.PState);
         }
 
         private void Update()

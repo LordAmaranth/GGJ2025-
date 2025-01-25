@@ -1,3 +1,4 @@
+using DG.Tweening;
 using GGJ.Common;
 using KanKikuchi.AudioManager;
 using R3;
@@ -21,6 +22,9 @@ namespace Project.GGJ2025
                 {
                     SEManager.Instance.Play(SEPath.SYSTEM20);
                     Debug.Log("Start Game!");
+
+                    DataStore.Instance.PState = PlayerState.Alive;
+
                     SceneType.Game.Load();
                 })
                 .AddTo(this);
