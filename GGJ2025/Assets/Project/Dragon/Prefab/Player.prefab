@@ -505,7 +505,19 @@ MonoBehaviour:
     m_ActionId: 36b91640-d19f-4b7c-9e3c-420bc230b969
     m_ActionName: 'Player/Jump[/XInputControllerWindows1/buttonSouth,/XInputControllerWindows/buttonSouth,/XInputControllerWindows2/buttonSouth,/XInputControllerWindows3/buttonSouth,/XInputControllerWindows4/buttonSouth]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 220819806797585473}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnAttack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: da2b3542-a87e-4326-ad8b-f44f182978ba
     m_ActionName: 'Player/Attack[/XInputControllerWindows1/buttonWest,/XInputControllerWindows/buttonWest,/XInputControllerWindows2/buttonWest,/XInputControllerWindows3/buttonWest,/XInputControllerWindows4/buttonWest]'
   - m_PersistentCalls:
@@ -537,6 +549,7 @@ MonoBehaviour:
   myRigidBody: {fileID: 4433417110422024779}
   animator: {fileID: 7202414806667876917}
   visualsRoot: {fileID: 7865414006727070506}
+  weapon: {fileID: 7459744897619744260}
   soundJump:
   - {fileID: 4866467598374369771}
   - {fileID: 3315102043968384095}
@@ -705,6 +718,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2458556607695238436}
     m_Modifications:
+    - target: {fileID: 747306276508116031, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
+      propertyPath: m_TagString
+      value: Weapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804940953818199159, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804940953818199159, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5910070071173760947, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6387528420456907421, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
       propertyPath: m_Name
       value: Visuals
@@ -749,6 +778,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8339711965357801232, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 220819806797585473}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -762,6 +795,11 @@ Transform:
 --- !u!95 &7202414806667876917 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: -2993063031113430142, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
+  m_PrefabInstance: {fileID: 3855819176615776695}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7459744897619744260 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5910070071173760947, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
   m_PrefabInstance: {fileID: 3855819176615776695}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7865414006727070506 stripped

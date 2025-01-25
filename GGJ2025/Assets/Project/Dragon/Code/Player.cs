@@ -12,8 +12,10 @@ public class Player : MonoBehaviour {
     [SerializeField] private Rigidbody2D myRigidBody;
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject visualsRoot;
+    [SerializeField] private GameObject weapon;
     [SerializeField] private AudioSource[] soundJump;
 
+    private bool isAttacking;
     private float movementHorizontalSpeed;
     private JumpState jumpState;
 
@@ -60,17 +62,17 @@ public class Player : MonoBehaviour {
         switch (newJumpState) {
             case JumpState.Grounded:
                 animator.SetTrigger("Landed");
-                animator.ResetTrigger("Jump");
-                animator.ResetTrigger("Falling");
+                animator.SetBool("Jump", false);
+                animator.SetBool("Falling", false);
                 break;
             case JumpState.Jumping:
-                animator.SetTrigger("Jump");
-                animator.ResetTrigger("Falling");
+                animator.SetBool("Jump", true);
+                animator.SetBool("Falling", false);
                 animator.ResetTrigger("Landed");
                 break;
             case JumpState.Falling:
-                animator.SetTrigger("Falling");
-                animator.ResetTrigger("Jump");
+                animator.SetBool("Falling", true);
+                animator.SetBool("Jump", false);
                 animator.ResetTrigger("Landed");
                 break;
             default:
@@ -97,5 +99,20 @@ public class Player : MonoBehaviour {
             soundJump[Random.Range(0, soundJump.Length)].Play();
             myRigidBody.AddForceY(config.JumpStartSpeed, ForceMode2D.Impulse);
         }
+    }
+
+
+    public void OnAttack(InputAction.CallbackContext context) {
+        if (isAttacking || !context.performed) {
+            return;
+        }
+
+        animator.ResetTrigger("Landed");
+        animator.SetTrigger("Attack");
+        isAttacking = true;
+    }
+
+    public void OnAttackFinished() {
+        isAttacking = false;
     }
 }
