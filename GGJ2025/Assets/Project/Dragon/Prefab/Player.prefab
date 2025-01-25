@@ -564,11 +564,12 @@ MonoBehaviour:
   windParticles: {fileID: 388221460550663424}
   weapon: {fileID: 7459744897619744260}
   straw: {fileID: 8729332366347889591}
-  windBox: {fileID: 5169158129894718858}
+  windBox: {fileID: 8888624883915763078}
   soundJump:
   - {fileID: 4866467598374369771}
   - {fileID: 3315102043968384095}
   - {fileID: 7954645710292994927}
+  windSources: []
 --- !u!50 &4433417110422024779
 Rigidbody2D:
   serializedVersion: 5
@@ -745,6 +746,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2884884979882698306, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5523188395715525120, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -815,11 +820,6 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3522274780384111799, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
   m_PrefabInstance: {fileID: 3855819176615776695}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5169158129894718858 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8232042398530726973, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
-  m_PrefabInstance: {fileID: 3855819176615776695}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6035484104628150123 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7368108671038000860, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
@@ -843,5 +843,10 @@ GameObject:
 --- !u!1 &8729332366347889591 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5523188395715525120, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
+  m_PrefabInstance: {fileID: 3855819176615776695}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &8888624883915763078 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 5681328452359011377, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
   m_PrefabInstance: {fileID: 3855819176615776695}
   m_PrefabAsset: {fileID: 0}

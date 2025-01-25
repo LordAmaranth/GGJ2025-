@@ -18,3 +18,4 @@ MonoBehaviour:
   <JumpHeldSpeed>k__BackingField: 4.5
   <MaxLandAngle>k__BackingField: 70
   <FallSpeedThreshold>k__BackingField: -10
+  <WindStrength>k__BackingField: 25

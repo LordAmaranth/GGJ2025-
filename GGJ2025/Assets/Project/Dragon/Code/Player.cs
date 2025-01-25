@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,8 +16,9 @@ public class Player : MonoBehaviour {
     [SerializeField] private ParticleSystem windParticles;
     [SerializeField] private GameObject weapon;
     [SerializeField] private GameObject straw;
-    [SerializeField] private GameObject windBox;
+    [SerializeField] private Collider2D windBox;
     [SerializeField] private AudioSource[] soundJump;
+    [SerializeField] private List<Collider2D> windSources = new();
 
     private bool isAttacking;
     private bool holdingBlowButton;
@@ -28,7 +30,8 @@ public class Player : MonoBehaviour {
         ChangeJumpState(JumpState.Falling);
         weapon.SetActive(false);
         straw.SetActive(false);
-        windBox.SetActive(false);
+        windBox.enabled = false;
+        windParticles.gameObject.SetActive(false);
     }
 
     void Update() {
@@ -54,6 +57,24 @@ public class Player : MonoBehaviour {
         }
 
         animator.SetBool("Walk", movementHorizontalSpeed != 0 && jumpState == JumpState.Grounded);
+
+        for (int i = windSources.Count - 1; i >= 0; i--) {
+            Collider2D windSource = windSources[i];
+            if (windSource.enabled) {
+
+                int directionMultiplier = 0;
+                if (windSource.transform.position.x < transform.position.x) {
+                    directionMultiplier = 1;
+                }
+                else if (windSource.transform.position.x > transform.position.x) {
+                    directionMultiplier = -1;
+                }
+                myRigidBody.AddForceX(config.WindStrength * directionMultiplier);
+            }
+            else {
+                windSources.Remove(windSource);
+            }
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
@@ -64,6 +85,25 @@ public class Player : MonoBehaviour {
         float landAngle = Vector3.Angle(collision.GetContact(0).normal, Vector2.up);
         if (landAngle < config.MaxLandAngle) {
             ChangeJumpState(JumpState.Grounded);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D trigger) {
+        if (!trigger.CompareTag("Air")) {
+            return;
+        }
+
+        if (!windSources.Contains(trigger)) {
+            windSources.Add(trigger);
+        }
+    }
+    private void OnTriggerExit2D(Collider2D trigger) {
+        if (!trigger.CompareTag("Air")) {
+            return;
+        }
+
+        if (windSources.Contains(trigger)) {
+            windSources.Remove(trigger);
         }
     }
 
@@ -156,9 +196,11 @@ public class Player : MonoBehaviour {
     }
 
     public void OnBlowAirStart() {
-        windBox.SetActive(true);
+        windBox.enabled = true;
+        windParticles.gameObject.SetActive(true);
     }
     public void OnBlowAirEnd() {
-        windBox.SetActive(false);
+        windBox.enabled = false;
+        windParticles.gameObject.SetActive(false);
     }
 }
