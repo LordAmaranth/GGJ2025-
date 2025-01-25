@@ -60,8 +60,8 @@ public class Bubble : MonoBehaviour {
             SetDeformAnimationExit();
         }
         // シャボン玉を膨らます時の当たり判定
-        if (other.gameObject.CompareTag("Air")) {
-            isAirColliding = false; // Airとの接触が終了
+        if (other.gameObject.CompareTag("Straw")) {
+            isAirColliding = false; // Strawとの接触が終了
             animator.SetTrigger("Idle");
         }
     }
