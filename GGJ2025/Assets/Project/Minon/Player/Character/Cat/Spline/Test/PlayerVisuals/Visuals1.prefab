@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 1804940953818199159}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -178,7 +178,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 747306276508116031}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -6408,7 +6408,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2921294377971702495
 Transform:
   m_ObjectHideFlags: 0
@@ -6618,7 +6618,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c4094b6fb8cb248b51e2caf6ba90e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!114 &5423886691151509438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6985,7 +6984,7 @@ GameObject:
   - component: {fileID: 5681328452359011377}
   m_Layer: 0
   m_Name: WindBox
-  m_TagString: Untagged
+  m_TagString: Air
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
