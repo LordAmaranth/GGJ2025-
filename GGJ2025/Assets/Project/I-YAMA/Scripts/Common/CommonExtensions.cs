@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace GGJ.Common
@@ -10,6 +11,11 @@ namespace GGJ.Common
         public static void Load(this SceneType me)
         {
             SceneManager.LoadScene(me.ToString());
+        }
+
+        public static Vector3 GetPositionRate(this Vector3 position)
+        {
+            return new Vector3(position.x / Screen.width, position.y / Screen.height, 0f);
         }
     }
 }
