@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 4229349185ca04947bc6b4383faf8eae
+guid: fc1da4925ddd4ba429dba8de7f6ae043
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1534199071082653132
-    second: Heikoshihen21_0
+      213: -2595862803844191866
+    second: hat_002_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,46 +97,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
     buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: tvOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -152,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Heikoshihen21_0
+      name: hat_002_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 800
-        height: 300
+        width: 430
+        height: 481
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 63, y: 0, z: 56, w: 0}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cc5ad963de19a4510800000000000000
-      internalID: 1534199071082653132
+      spriteID: 689a73b8884a9fbd0800000000000000
+      internalID: -2595862803844191866
       vertices: []
       indices: 
       edges: []
@@ -177,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 640a59b3ff25c214cac8cc849039f180
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -186,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Heikoshihen21_0: 1534199071082653132
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
