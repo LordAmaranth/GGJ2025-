@@ -1,4 +1,5 @@
 using GGJ.Common;
+using UnityEngine.Serialization;
 
 namespace Project.GGJ2025
 {
@@ -7,7 +8,9 @@ namespace Project.GGJ2025
     /// </summary>
     public class DataStore : SingletonMonoBehaviour<DataStore>
     {
-        public PlayerState PState = PlayerState.None;
+        public PlayerState PlayerState = PlayerState.None;
+
+        public GameState GameState = GameState.Start;
 
         protected override void Init()
         {
