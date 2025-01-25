@@ -43,7 +43,6 @@ namespace Project.GGJ2025
             if (target.min == null)
             {
                 transform.position = Vector3.SmoothDamp(transform.position, defaultposition, ref velocity, smoothTime);
-                Debug.Log($"A defaultposition:{defaultposition}");
                 return;
             }
 
@@ -51,7 +50,6 @@ namespace Project.GGJ2025
             {
                 var tPosition = new Vector3(targets[0].position.x, targets[0].position.y + offset.y, defaultposition.z);
                 transform.position = Vector3.SmoothDamp(transform.position, tPosition, ref velocity, soloSmoothTime);
-                Debug.Log($"B tPosition:{tPosition}");
                 return;
             }
             // 2点間の中心点からカメラの位置を更新

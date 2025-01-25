@@ -17,14 +17,16 @@ namespace Project.GGJ2025
         public GameObject battle;
         public GameObject result;
 
-        private void Awake()
+        /// <inheritdoc/>>
+        protected override void Init()
         {
+            base.Init();
+            
             // PlayerInputManager からプレイヤー登録最大数設定
             DataStore.Instance.Init(playerInputManager.maxPlayerCount);
             
             // ゲーム状態監視
             DataStore.Instance.GameState
-                .Skip(1)
                 .Subscribe(state =>
                 {
                     Debug.Log($"state:{state}");
@@ -37,6 +39,7 @@ namespace Project.GGJ2025
                 .AddTo(this);
             
             DataStore.Instance.GameState.Value = GameState.Title;
+            Debug.Log($"Set state:{DataStore.Instance.GameState.Value}");
         }
 
         private void Start()
