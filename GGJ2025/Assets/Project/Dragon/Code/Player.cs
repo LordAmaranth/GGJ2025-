@@ -16,6 +16,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private AudioSource[] soundJump;
 
     private bool isAttacking;
+    private bool holdingBlowButton;
     private float movementHorizontalSpeed;
     private JumpState jumpState;
 
@@ -103,6 +104,13 @@ public class Player : MonoBehaviour {
 
 
     public void OnAttack(InputAction.CallbackContext context) {
+        if (holdingBlowButton && context.canceled) {
+            isAttacking = false;
+            holdingBlowButton = false;
+            animator.SetBool("BlowAir", false);
+            return;
+        }
+
         if (isAttacking || !context.performed) {
             return;
         }
@@ -110,9 +118,13 @@ public class Player : MonoBehaviour {
         animator.ResetTrigger("Landed");
         animator.SetTrigger("Attack");
         isAttacking = true;
+        holdingBlowButton = true;
     }
 
     public void OnAttackFinished() {
+        if (holdingBlowButton) {
+            animator.SetBool("BlowAir", true);
+        }
         isAttacking = false;
     }
 }
