@@ -15,6 +15,14 @@ namespace Project.GGJ2025
         Alive,
         Death
     }
+
+    public enum GameState
+    {
+        Start,
+        Spawn,
+        Pause,
+        End,
+    }
     
     /// <summary>
     /// 定数
