@@ -7,7 +7,7 @@ namespace Project.GGJ2025
     {
         private void Start()
         {
-            Debug.Log(DataStore.Instance.PState);
+            Debug.Log(DataStore.Instance.PlayerState);
         }
 
         private void Update()

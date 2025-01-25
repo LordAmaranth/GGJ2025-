@@ -23,7 +23,7 @@ namespace Project.GGJ2025
                     SEManager.Instance.Play(SEPath.SYSTEM20);
                     Debug.Log("Start Game!");
 
-                    DataStore.Instance.PState = PlayerState.Alive;
+                    DataStore.Instance.PlayerState = PlayerState.Alive;
 
                     SceneType.Game.Load();
                 })
