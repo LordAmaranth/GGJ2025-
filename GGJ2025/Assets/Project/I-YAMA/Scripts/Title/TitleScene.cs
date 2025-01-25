@@ -13,6 +13,7 @@ namespace Project.GGJ2025
         
         private void Start()
         {
+            // BGM再生
             BGMManager.Instance.Play(BGMPath.FANTASY14);
             
             // ボタンのクリック
