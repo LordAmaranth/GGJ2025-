@@ -2,30 +2,28 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour {
+    private enum JumpState {
+        Grounded = 0,
+        Jumping = 1,
+        Falling = 2,
+    }
+
     [SerializeField] private PlayerConfig config;
     [SerializeField] private Rigidbody2D myRigidBody;
 
     private float movementHorizontalSpeed;
-    private bool isGrounded;
-    private bool jumping;
-    private bool falling;
-    private bool isMovingVertically => myRigidBody.linearVelocityY != 0f;
-    void Start() {
+    private JumpState jumpState;
 
-    }
 
     void Update() {
-        if (jumping) {
-            Debug.Log(myRigidBody.linearVelocityY);
+        if (myRigidBody.linearVelocityY < 0) {
+            jumpState = JumpState.Falling;
+        }
 
+        if (jumpState == JumpState.Jumping) {
             myRigidBody.AddForceY(config.JumpHeldSpeed);
             if (myRigidBody.linearVelocityY >= config.MaxAscendSpeed) {
-                jumping = false;
-                falling = true;
-            }
-            else if (myRigidBody.linearVelocityY < 0) {
-                falling = true;
-                jumping = false;
+                jumpState = JumpState.Falling;
             }
         }
 
@@ -38,24 +36,24 @@ public class Player : MonoBehaviour {
         }
 
         if (collision.GetContact(0).normal == Vector2.up) {
-            isGrounded = true;
-            falling = false;
+            jumpState = JumpState.Grounded;
         }
     }
 
     public void OnMove(InputAction.CallbackContext context) => movementHorizontalSpeed = context.ReadValue<float>();
     public void OnJump(InputAction.CallbackContext context) {
         if (context.canceled) {
-            jumping = false;
+            if (jumpState == JumpState.Jumping) {
+                jumpState = JumpState.Falling;
+            }
         }
 
-        if (!isGrounded || isMovingVertically || falling) {
+        if (jumpState != JumpState.Grounded) {
             return;
         }
 
         if (context.performed) {
-            isGrounded = false;
-            jumping = true;
+            jumpState = JumpState.Jumping;
             myRigidBody.AddForceY(config.JumpStartSpeed, ForceMode2D.Impulse);
         }
     }
