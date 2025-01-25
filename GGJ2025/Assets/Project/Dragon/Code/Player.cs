@@ -10,6 +10,8 @@ public class Player : MonoBehaviour {
 
     [SerializeField] private PlayerConfig config;
     [SerializeField] private Rigidbody2D myRigidBody;
+    [SerializeField] private Animator animator;
+    [SerializeField] private GameObject visualsRoot;
 
     private float movementHorizontalSpeed;
     private JumpState jumpState;
@@ -28,6 +30,11 @@ public class Player : MonoBehaviour {
         }
 
         myRigidBody.linearVelocity = new Vector2(movementHorizontalSpeed * config.MovementSpeed, myRigidBody.linearVelocity.y);
+        if (movementHorizontalSpeed != 0) {
+            visualsRoot.transform.localScale = new Vector2(movementHorizontalSpeed < 0 ? 1 : -1, 1);
+        }
+
+        animator.SetBool("Walk", movementHorizontalSpeed != 0 && jumpState == JumpState.Grounded);
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
