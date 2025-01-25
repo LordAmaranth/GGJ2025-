@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Bubble : MonoBehaviour {
@@ -5,6 +6,8 @@ public class Bubble : MonoBehaviour {
     private bool isAirColliding = false;
     private bool isHit = false;
     private Vector3 originalScale;
+    [SerializeField] private Rigidbody2D myRigidBody;
+    private List<Collider2D> windSources = new();
 
     [SerializeField]
     public BubbleSettings settings;
@@ -26,6 +29,25 @@ public class Bubble : MonoBehaviour {
         // 最大スケールを超えないように制限
         if (transform.localScale.x > settings.maxScale) {
             transform.localScale = Vector3.one * settings.maxScale;
+        }
+
+
+        for (int i = windSources.Count - 1; i >= 0; i--) {
+            Collider2D windSource = windSources[i];
+            if (windSource.enabled) {
+
+                int directionMultiplier = 0;
+                if (windSource.transform.position.x < transform.position.x) {
+                    directionMultiplier = 1;
+                }
+                else if (windSource.transform.position.x > transform.position.x) {
+                    directionMultiplier = -1;
+                }
+                myRigidBody.AddForceX(settings.WindStrength * directionMultiplier);
+            }
+            else {
+                windSources.Remove(windSource);
+            }
         }
     }
 
@@ -53,17 +75,25 @@ public class Bubble : MonoBehaviour {
         if (other.gameObject.CompareTag("Weapon")) {
             Destroy(gameObject);
         }
+
+        if (other.CompareTag("Air") && !windSources.Contains(other)) {
+            windSources.Add(other);
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
         if (other.gameObject.CompareTag("Player")) {
             SetDeformAnimationExit();
-            isAirColliding = false; 
+            isAirColliding = false;
         }
         // シャボン玉を膨らます時の当たり判定
         if (other.gameObject.CompareTag("Straw")) {
             isAirColliding = false;
             animator.SetTrigger("Idle");
+        }
+
+        if (other.CompareTag("Air") && windSources.Contains(other)) {
+            windSources.Remove(other);
         }
     }
 
