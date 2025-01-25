@@ -12,9 +12,10 @@ public class Player : MonoBehaviour {
     [SerializeField] private Rigidbody2D myRigidBody;
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject visualsRoot;
+    [SerializeField] private AudioSource[] soundJump;
 
     private float movementHorizontalSpeed;
-    private JumpState jumpState;
+    private JumpState jumpState = JumpState.Falling;
 
 
     void Update() {
@@ -61,6 +62,7 @@ public class Player : MonoBehaviour {
 
         if (context.performed) {
             jumpState = JumpState.Jumping;
+            soundJump[Random.Range(0, soundJump.Length)].Play();
             myRigidBody.AddForceY(config.JumpStartSpeed, ForceMode2D.Impulse);
         }
     }
