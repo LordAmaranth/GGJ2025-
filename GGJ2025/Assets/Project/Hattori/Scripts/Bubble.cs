@@ -4,41 +4,41 @@ public class Bubble : MonoBehaviour
 {
     private Animator animator;
     private bool isAirColliding = false;
+    private bool isHit = false;
     private Vector3 originalScale;
-    
-    public float maxScale = 2f; 
-    public float scaleIncreaseSpeed = 1f;
-    public float upSpeed = 0.1f;
+
+    [SerializeField]
+    private BubbleSettings settings;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        originalScale = transform.localScale; // 初期サイズを保存
+        originalScale = transform.localScale; 
     }
 
     void Update()
     {
         // 上方向に移動
-        transform.Translate(Vector3.up * upSpeed * Time.deltaTime);
+        transform.Translate(Vector3.up * settings.upSpeed * Time.deltaTime);
 
         // Airが当たっている間、スケールを大きくする
-        if (isAirColliding && transform.localScale.x < maxScale)
+        if (isAirColliding && transform.localScale.x < settings.maxScale)
         {
-            transform.localScale += Vector3.one * scaleIncreaseSpeed * Time.deltaTime;
+            transform.localScale += Vector3.one * settings.scaleIncreaseSpeed * Time.deltaTime;
         }
+
         // 最大スケールを超えないように制限
-        if (transform.localScale.x > maxScale)
+        if (transform.localScale.x > settings.maxScale)
         {
-            transform.localScale = Vector3.one * maxScale;
+            transform.localScale = Vector3.one * settings.maxScale;
         }
-        
     }
-    
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-        // 接触点のワールド座標を取得
+            // 接触点のワールド座標を取得
             Vector2 contactPoint = collision.GetContact(0).point;
 
             // 接触点をローカル座標に変換
@@ -55,10 +55,10 @@ public class Bubble : MonoBehaviour
         if (other.gameObject.CompareTag("Air"))
         {
             isAirColliding = true; // Airとの接触を開始
-            animator.SetTrigger("isAir");
+            animator.SetTrigger("IsAir");
         }
 
-        //シャボン玉をプスする時のの当たり判定
+        // シャボン玉をプスする時の当たり判定
         if (other.gameObject.CompareTag("Weapon"))
         {
             Destroy(gameObject);
@@ -75,7 +75,7 @@ public class Bubble : MonoBehaviour
         if (other.gameObject.CompareTag("Air"))
         {
             isAirColliding = false; // Airとの接触が終了
-            animator.SetTrigger("0");
+            animator.SetTrigger("Idle");
         }
     }
 
@@ -90,22 +90,25 @@ public class Bubble : MonoBehaviour
 
         // セクターの中心角度（10度）に基づいてセクター番号を計算
         int sector = Mathf.FloorToInt(angle / 10f);
+        Debug.Log("DeformSector" + localContactPoint.x);
 
         // 対応するアニメーショントリガーを設定
-        if(sector >= 12){
-            sector = 2;
-        }
-        else{
-            sector = 1;
-        }
+        // if (sector >= 11)
+        // {
+        //     sector = 2;
+        // }
+        // else
+        // {
+        //     sector = 1;
+        // }
+        sector = 1;
 
-        animator.SetTrigger(sector.ToString());
-        Debug.Log("DeformSector" + sector);
+        animator.SetTrigger("Hit" + sector.ToString());
+        // Debug.Log("DeformSector" + sector);
     }
 
     private void SetDeformAnimationExit()
     {
-        animator.SetTrigger("0");
-        Debug.Log("0");
+        animator.SetTrigger("Idle");
     }
 }
