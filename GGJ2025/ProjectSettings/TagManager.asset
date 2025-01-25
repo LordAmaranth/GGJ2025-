@@ -9,6 +9,7 @@ TagManager:
   - TxtUI
   - Air
   - Weapon
+  - Straw
   layers:
   - Default
   - TransparentFX

@@ -525,7 +525,19 @@ MonoBehaviour:
     m_ActionId: e9c6b52e-922b-48dc-87da-fcfa3189d164
     m_ActionName: 'Player/BlowAir[/XInputControllerWindows1/buttonWest,/XInputControllerWindows/buttonWest,/XInputControllerWindows2/buttonWest,/XInputControllerWindows3/buttonWest,/XInputControllerWindows4/buttonWest]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 220819806797585473}
+        m_TargetAssemblyTypeName: Player, Assembly-CSharp
+        m_MethodName: OnBlowBubble
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 1f834175-6cb0-42bf-a1a2-ec198b69e459
     m_ActionName: 'Player/BlowBubble[/XInputControllerWindows1/buttonEast,/XInputControllerWindows/buttonEast,/XInputControllerWindows2/buttonEast,/XInputControllerWindows3/buttonEast,/XInputControllerWindows4/buttonEast]'
   m_NeverAutoSwitchControlSchemes: 0
@@ -551,6 +563,7 @@ MonoBehaviour:
   visualsRoot: {fileID: 7865414006727070506}
   windParticles: {fileID: 388221460550663424}
   weapon: {fileID: 7459744897619744260}
+  straw: {fileID: 8729332366347889591}
   windBox: {fileID: 5169158129894718858}
   soundJump:
   - {fileID: 4866467598374369771}
@@ -732,6 +745,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5523188395715525120, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5910070071173760947, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -821,5 +838,10 @@ GameObject:
 --- !u!1 &7865414006727070506 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6387528420456907421, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
+  m_PrefabInstance: {fileID: 3855819176615776695}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8729332366347889591 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5523188395715525120, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
   m_PrefabInstance: {fileID: 3855819176615776695}
   m_PrefabAsset: {fileID: 0}

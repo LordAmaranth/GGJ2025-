@@ -14,17 +14,20 @@ public class Player : MonoBehaviour {
     [SerializeField] private GameObject visualsRoot;
     [SerializeField] private ParticleSystem windParticles;
     [SerializeField] private GameObject weapon;
+    [SerializeField] private GameObject straw;
     [SerializeField] private GameObject windBox;
     [SerializeField] private AudioSource[] soundJump;
 
     private bool isAttacking;
     private bool holdingBlowButton;
+    private bool isBlowingBubble;
     private float movementHorizontalSpeed;
     private JumpState jumpState;
 
     private void Start() {
         ChangeJumpState(JumpState.Falling);
         weapon.SetActive(false);
+        straw.SetActive(false);
         windBox.SetActive(false);
     }
 
@@ -120,7 +123,7 @@ public class Player : MonoBehaviour {
             return;
         }
 
-        if (isAttacking || !context.performed) {
+        if (isAttacking || isBlowingBubble || !context.performed) {
             return;
         }
 
@@ -128,6 +131,21 @@ public class Player : MonoBehaviour {
         animator.SetTrigger("Attack");
         isAttacking = true;
         holdingBlowButton = true;
+    }
+    public void OnBlowBubble(InputAction.CallbackContext context) {
+        if (context.canceled) {
+            isBlowingBubble = false;
+            straw.SetActive(false);
+            return;
+        }
+
+        if (!context.performed || holdingBlowButton || isAttacking) {
+            return;
+        }
+
+        isBlowingBubble = true;
+        straw.SetActive(true);
+
     }
 
     public void OnAttackFinished() {
