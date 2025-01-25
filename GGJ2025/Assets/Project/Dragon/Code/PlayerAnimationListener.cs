@@ -6,4 +6,10 @@ public class PlayerAnimationListener : MonoBehaviour {
     public void OnAttackFinished() {
         player.OnAttackFinished();
     }
+    public void OnBlowAirStart() {
+        player.OnBlowAirStart();
+    }
+    public void OnBlowAirEnd() {
+        player.OnBlowAirEnd();
+    }
 }

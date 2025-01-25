@@ -12,7 +12,9 @@ public class Player : MonoBehaviour {
     [SerializeField] private Rigidbody2D myRigidBody;
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject visualsRoot;
+    [SerializeField] private ParticleSystem windParticles;
     [SerializeField] private GameObject weapon;
+    [SerializeField] private GameObject windBox;
     [SerializeField] private AudioSource[] soundJump;
 
     private bool isAttacking;
@@ -22,6 +24,8 @@ public class Player : MonoBehaviour {
 
     private void Start() {
         ChangeJumpState(JumpState.Falling);
+        weapon.SetActive(false);
+        windBox.SetActive(false);
     }
 
     void Update() {
@@ -39,6 +43,7 @@ public class Player : MonoBehaviour {
         myRigidBody.linearVelocity = new Vector2(movementHorizontalSpeed * config.MovementSpeed, myRigidBody.linearVelocity.y);
         if (movementHorizontalSpeed != 0) {
             visualsRoot.transform.localScale = new Vector2(movementHorizontalSpeed < 0 ? 1 : -1, 1);
+            windParticles.transform.localScale = new Vector2(movementHorizontalSpeed < 0 ? 1 : -1, 1);
         }
 
         animator.SetBool("Walk", movementHorizontalSpeed != 0 && jumpState == JumpState.Grounded);
@@ -126,5 +131,12 @@ public class Player : MonoBehaviour {
             animator.SetBool("BlowAir", true);
         }
         isAttacking = false;
+    }
+
+    public void OnBlowAirStart() {
+        windBox.SetActive(true);
+    }
+    public void OnBlowAirEnd() {
+        windBox.SetActive(false);
     }
 }

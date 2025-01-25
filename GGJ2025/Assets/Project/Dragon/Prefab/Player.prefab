@@ -549,7 +549,9 @@ MonoBehaviour:
   myRigidBody: {fileID: 4433417110422024779}
   animator: {fileID: 7202414806667876917}
   visualsRoot: {fileID: 7865414006727070506}
+  windParticles: {fileID: 388221460550663424}
   weapon: {fileID: 7459744897619744260}
+  windBox: {fileID: 5169158129894718858}
   soundJump:
   - {fileID: 4866467598374369771}
   - {fileID: 3315102043968384095}
@@ -787,6 +789,16 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
+--- !u!198 &388221460550663424 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3522274780384111799, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
+  m_PrefabInstance: {fileID: 3855819176615776695}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5169158129894718858 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8232042398530726973, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
+  m_PrefabInstance: {fileID: 3855819176615776695}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6035484104628150123 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7368108671038000860, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
