@@ -7,7 +7,7 @@ public class Bubble : MonoBehaviour {
     private Vector3 originalScale;
 
     [SerializeField]
-    private BubbleSettings settings;
+    public BubbleSettings settings;
 
     void Start() {
         animator = GetComponent<Animator>();
