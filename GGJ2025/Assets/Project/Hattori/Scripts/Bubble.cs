@@ -35,7 +35,6 @@ public class Bubble : MonoBehaviour {
         for (int i = windSources.Count - 1; i >= 0; i--) {
             Collider2D windSource = windSources[i];
             if (windSource.enabled) {
-
                 int directionMultiplier = 0;
                 if (windSource.transform.position.x < transform.position.x) {
                     directionMultiplier = 1;
