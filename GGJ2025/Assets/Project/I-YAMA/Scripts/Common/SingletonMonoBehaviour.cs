@@ -49,8 +49,9 @@ namespace GGJ.Common
                 return;
             }
 
-            //自分じゃない場合は重複して存在しているので、エラー
-            Debug.LogError(typeof(T) + " is duplicated");
+            //自分じゃない場合は重複して存在しているので、削除
+            Debug.Log(typeof(T) + " is duplicated");
+            Destroy(this.gameObject);
         }
     }
 
