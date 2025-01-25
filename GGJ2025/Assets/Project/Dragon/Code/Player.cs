@@ -15,21 +15,18 @@ public class Player : MonoBehaviour {
     [SerializeField] private AudioSource[] soundJump;
 
     private float movementHorizontalSpeed;
-    private JumpState jumpState;
+    private JumpState jumpState = JumpState.Falling;
 
-    private void Start() {
-        ChangeJumpState(JumpState.Falling);
-    }
 
     void Update() {
         if (myRigidBody.linearVelocityY < 0) {
-            ChangeJumpState(JumpState.Falling);
+            jumpState = JumpState.Falling;
         }
 
         if (jumpState == JumpState.Jumping) {
             myRigidBody.AddForceY(config.JumpHeldSpeed);
             if (myRigidBody.linearVelocityY >= config.MaxAscendSpeed) {
-                ChangeJumpState(JumpState.Falling);
+                jumpState = JumpState.Falling;
             }
         }
 
@@ -47,44 +44,15 @@ public class Player : MonoBehaviour {
         }
 
         if (collision.GetContact(0).normal == Vector2.up) {
-            ChangeJumpState(JumpState.Grounded);
+            jumpState = JumpState.Grounded;
         }
-    }
-
-    private void ChangeJumpState(JumpState newJumpState) {
-        if (newJumpState == jumpState) {
-            return;
-        }
-
-        Debug.Log($"State Switch {newJumpState}");
-        switch (newJumpState) {
-            case JumpState.Grounded:
-                animator.SetTrigger("Landed");
-                animator.ResetTrigger("Jump");
-                animator.ResetTrigger("Falling");
-                break;
-            case JumpState.Jumping:
-                animator.SetTrigger("Jump");
-                animator.ResetTrigger("Falling");
-                animator.ResetTrigger("Landed");
-                break;
-            case JumpState.Falling:
-                animator.SetTrigger("Falling");
-                animator.ResetTrigger("Jump");
-                animator.ResetTrigger("Landed");
-                break;
-            default:
-                throw new System.Exception($"Unhandled jump state {newJumpState}!");
-        }
-
-        jumpState = newJumpState;
     }
 
     public void OnMove(InputAction.CallbackContext context) => movementHorizontalSpeed = context.ReadValue<float>();
     public void OnJump(InputAction.CallbackContext context) {
         if (context.canceled) {
             if (jumpState == JumpState.Jumping) {
-                ChangeJumpState(JumpState.Falling);
+                jumpState = JumpState.Falling;
             }
         }
 
@@ -93,7 +61,7 @@ public class Player : MonoBehaviour {
         }
 
         if (context.performed) {
-            ChangeJumpState(JumpState.Jumping);
+            jumpState = JumpState.Jumping;
             soundJump[Random.Range(0, soundJump.Length)].Play();
             myRigidBody.AddForceY(config.JumpStartSpeed, ForceMode2D.Impulse);
         }
