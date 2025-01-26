@@ -20,6 +20,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private AudioSource soundTaunt2;
     [SerializeField] private AudioSource soundTaunt3;
     [SerializeField] private AudioSource soundBlowBubbleStart;
+    [SerializeField] private AudioSource soundLand;
     [SerializeField] private ParticleSystem landBubbleParticles;
     private List<Collider2D> windSources = new();
 
@@ -130,6 +131,7 @@ public class Player : MonoBehaviour {
             ChangeJumpState(JumpState.Grounded);
             landBubbleParticles.transform.position = collision.contacts[0].point;
             landBubbleParticles.Play();
+            soundLand.Play();
         }
     }
 
