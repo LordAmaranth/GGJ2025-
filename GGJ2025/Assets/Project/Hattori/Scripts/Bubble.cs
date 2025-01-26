@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections; 
 using UnityEngine;
 using KanKikuchi.AudioManager;
 
@@ -117,12 +118,24 @@ public class Bubble : MonoBehaviour {
                 isLoop          : false,             //ループ再生するか
                 callback        : null              //再生終了後の処理
             );
-            Destroy(gameObject);
+            animator.SetTrigger("Hit2");
+            StartCoroutine(DestroyAfterDelay());
+            // Destroy(gameObject);
         }
+
 
         if (other.CompareTag("Air") && !windSources.Contains(other)) {
             windSources.Add(other);
         }
+    }
+
+    private IEnumerator DestroyAfterDelay()
+    {
+        // 0.5秒待機
+        yield return new WaitForSeconds(0.2f);
+
+        // ゲームオブジェクトを破壊
+        Destroy(gameObject);
     }
 
     private void OnTriggerExit2D(Collider2D other) {
