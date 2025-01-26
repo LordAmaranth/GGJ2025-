@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using GGJ.Common;
 using R3;
@@ -106,6 +108,7 @@ namespace Project.GGJ2025
                     });
                     break;
                 case GameState.Start:
+                case GameState.Spawn:
                     if (playerInputManager.joiningEnabled)
                     {
                         // 参加無効
@@ -119,16 +122,21 @@ namespace Project.GGJ2025
                         // プレイヤー位置ランダム
                         var randPosition = new Vector3(Random.Range(gameStartPos.x, gameStartPos.y), 10f, 0f);
                         playerInfo.Player.gameObject.transform.position = randPosition;
-                    });
-                    break;
-                case GameState.Spawn:
-                    // リスポーン
-                    DataStore.Instance.PlayerInfos.ForEach(playerInfo =>
-                    {
-                        // スコアリセット
-                        playerInfo.Score.Value = 0;
-                        // プレイヤー位置初期化
-                        playerInfo.Player.gameObject.transform.position = Vector3.zero;
+                        
+                        // 制御停止
+                        playerInfo.Player.DisableControls();
+                        
+                        // 一定時間後に処理を呼び出すコルーチン
+                        IEnumerator DelayCoroutine(float seconds, System.Action action)
+                        {
+                            yield return new WaitForSeconds(seconds);
+                            action?.Invoke();
+                        }
+                        StartCoroutine(DelayCoroutine(2, () =>
+                        {
+                            // 2秒後にここの処理が実行される
+                            playerInfo.Player.ReenableControls();
+                        }));
                     });
                     break;
                 case GameState.Pause:
@@ -224,7 +232,7 @@ namespace Project.GGJ2025
                 {
                     var dataStore = DataStore.Instance;
                     var playerInfos = dataStore.PlayerInfos;
-                    if (playerInfos.All(x => x.AState.Value == AreaState.StartPointArea))
+                    if (playerInfos.Count >= 2 && playerInfos.All(x => x.AState.Value == AreaState.StartPointArea))
                     {
                         // 全員スタートエリアにいる場合
                         dataStore.GameState.Value = GameState.Start;
@@ -262,6 +270,11 @@ namespace Project.GGJ2025
                     {
                         // 死亡エリアに入った場合
                         player.PState.Value = PlayerState.Death;
+                        if (playerInfos.Count(x => x.PState.Value != PlayerState.Death) <= 1)
+                        {
+                            // 1人以外全員死亡したらゲーム終了 リザルト遷移
+                            dataStore.GameState.Value = GameState.Result;
+                        }
                     }
                 })
                 .AddTo(player.Player.gameObject);
