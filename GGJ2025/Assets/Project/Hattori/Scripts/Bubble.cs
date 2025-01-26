@@ -134,7 +134,7 @@ public class Bubble : MonoBehaviour {
 
         // セクターの中心角度（10度）に基づいてセクター番号を計算
         int sector = Mathf.FloorToInt(angle / 10f);
-        Debug.Log("DeformSector" + localContactPoint.x);
+        // Debug.Log("DeformSector" + localContactPoint.x);
 
         // 対応するアニメーショントリガーを設定
         // if (sector >= 11)
