@@ -148,7 +148,7 @@ namespace Project.GGJ2025
                     // 一時停止
                     break;
                 case GameState.End:
-                    BGMManager.Instance.Play(BGMPath.MAIN2025);
+                    BGMManager.Instance.Play(BGMPath.VICTORY_MARCH_2);
                     // ゲーム終了
                     DataStore.Instance.PlayerInfos.ForEach(playerInfo =>
                     {
@@ -157,7 +157,8 @@ namespace Project.GGJ2025
                     });
                     break;
                 case GameState.Result:
-                    BGMManager.Instance.Play(BGMPath.MAIN2025);
+                    //BGMManager.Instance.Play(BGMPath.MAIN2025);
+                    BGMManager.Instance.Play(BGMPath.VICTORY_MARCH_2);
                     zoomCamera2D.targets.Clear();
                     // リザルト
                     DataStore.Instance.PlayerInfos.ForEach(playerInfo =>

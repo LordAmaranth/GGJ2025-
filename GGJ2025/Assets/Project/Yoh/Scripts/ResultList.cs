@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using KanKikuchi.AudioManager;
 
 public class ResultList : MonoBehaviour
 {
@@ -73,6 +74,7 @@ public class ResultList : MonoBehaviour
 
         //Object set
         int rank = 1;
+        yield return new WaitForSeconds(1.0f);//First Wait
         foreach (DataStore.PlayerInfo pf in players)
         {
             Debug.Log("rank:" + rank + " Score:" + pf.Score.Value);
@@ -80,6 +82,8 @@ public class ResultList : MonoBehaviour
             yield return new WaitForSeconds(1.2f);//test 0.2f
             rank++;
         }
+        SEManager.Instance.Play(SEPath.DON_PUFF);
+        SEManager.Instance.Play(SEPath.CLAP00);
     }
 
     //
