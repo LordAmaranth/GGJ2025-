@@ -99,6 +99,7 @@ namespace Project.GGJ2025
                     BGMManager.Instance.Play(BGMPath.MAIN2025);
                     break;
                 case GameState.Join:
+                    BGMManager.Instance.Play(BGMPath.MAIN2025);
                     if (!playerInputManager.joiningEnabled)
                     {
                         // 参加有効
@@ -137,7 +138,7 @@ namespace Project.GGJ2025
                             yield return new WaitForSeconds(seconds);
                             action?.Invoke();
                         }
-                        StartCoroutine(DelayCoroutine(2, () =>
+                        StartCoroutine(DelayCoroutine(0.8f, () =>
                         {
                             // 2秒後にここの処理が実行される
                             playerInfo.Player.ReenableControls();
