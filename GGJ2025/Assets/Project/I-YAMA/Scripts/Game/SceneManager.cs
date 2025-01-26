@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using GGJ.Common;
+using KanKikuchi.AudioManager;
 using R3;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,7 +11,7 @@ namespace Project.GGJ2025
     /// <summary>
     /// 場面制御クラス
     /// </summary>
-    public class SceneManager : SingletonMonoBehaviour<SceneManager>
+    public class SceneManager : GGJ.Common.SingletonMonoBehaviour<SceneManager>
     {
         public PlayerInputManager playerInputManager;
         public ZoomCamera2D zoomCamera2D;
@@ -82,6 +82,9 @@ namespace Project.GGJ2025
                     zoomCamera2D.targets.Remove(playerInfo.Player.transform);
                 })
                 .AddTo(this);
+            
+            // タイトルBGM再生
+            BGMManager.Instance.Play(BGMPath.MAIN2025);
         }
         
         /// <summary>
@@ -93,6 +96,7 @@ namespace Project.GGJ2025
             {
                 case GameState.Title:
                     // タイトル画面
+                    BGMManager.Instance.Play(BGMPath.MAIN2025);
                     break;
                 case GameState.Join:
                     if (!playerInputManager.joiningEnabled)
@@ -109,6 +113,7 @@ namespace Project.GGJ2025
                     break;
                 case GameState.Start:
                 case GameState.Spawn:
+                    BGMManager.Instance.Play(BGMPath.BATTLE2025);
                     if (playerInputManager.joiningEnabled)
                     {
                         // 参加無効
@@ -143,6 +148,7 @@ namespace Project.GGJ2025
                     // 一時停止
                     break;
                 case GameState.End:
+                    BGMManager.Instance.Play(BGMPath.MAIN2025);
                     // ゲーム終了
                     DataStore.Instance.PlayerInfos.ForEach(playerInfo =>
                     {
@@ -151,6 +157,7 @@ namespace Project.GGJ2025
                     });
                     break;
                 case GameState.Result:
+                    BGMManager.Instance.Play(BGMPath.MAIN2025);
                     zoomCamera2D.targets.Clear();
                     // リザルト
                     DataStore.Instance.PlayerInfos.ForEach(playerInfo =>
