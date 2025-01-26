@@ -61,7 +61,7 @@ public class ResultList : MonoBehaviour
             Debug.LogError("No playerInfos");
         }
         
-        var playerInfosOrdered = playerInfos.OrderBy(p => p.Rank).ToList();
+        var playerInfosOrdered = playerInfos.OrderBy(p => p.Rank.Value).ToList();
         //playerInfos.Sort((a, b) => a.Rank - b.Rank);
 
         //応急
@@ -75,7 +75,7 @@ public class ResultList : MonoBehaviour
         int rank = 1;
         foreach (DataStore.PlayerInfo pf in players)
         {
-            Debug.Log("rank:" + rank + " Score:" + pf.Score);
+            Debug.Log("rank:" + rank + " Score:" + pf.Score.Value);
             yield return StartCoroutine(makeResultStatus(pf, rank));
             yield return new WaitForSeconds(1.2f);//test 0.2f
             rank++;
@@ -96,10 +96,10 @@ public class ResultList : MonoBehaviour
         btn.transform.Find("Face").GetComponent<Image>().sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
 
         //Score
-        btn.transform.Find("Scores/Txt").GetComponent<Text>().text = pf.Score.ToString() + "位";
+        btn.transform.Find("Scores/Txt").GetComponent<Text>().text = pf.Score.Value.ToString() + "位";
 
         //item
-        gameObject.transform.Find("Items/Item0 + i").gameObject.SetActive(true);
+        // gameObject.transform.Find("Items/Item0 + i").gameObject.SetActive(true);
         GetComponent<Image>().sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
 
         
