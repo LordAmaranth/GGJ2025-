@@ -1,3 +1,6 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 using GGJ.Common;
 using R3;
 using UnityEngine;
@@ -16,7 +19,9 @@ namespace Project.GGJ2025
         public GameObject join;
         public GameObject battle;
         public GameObject result;
-
+        
+        private GameState oldGameState = GameState.Title;
+        
         /// <inheritdoc/>>
         protected override void Init()
         {
@@ -35,6 +40,13 @@ namespace Project.GGJ2025
                     join.SetActive(state == GameState.Join);
                     battle.SetActive(state == GameState.Start || state == GameState.Spawn || state == GameState.Pause || state == GameState.End);
                     result.SetActive(state == GameState.Result);
+
+                    // ゲーム状態切り替え
+                    if (oldGameState != state)
+                    {
+                        oldGameState = state;
+                        ChangeGameState(state);
+                    }
                 })
                 .AddTo(this);
             
@@ -54,6 +66,7 @@ namespace Project.GGJ2025
                     }
                     Debug.Log($"playerId:{playerInfo.PlayerId} join");
                     zoomCamera2D.targets.Add(playerInfo.Player.transform);
+                    SetEvent(playerInfo);
                 })
                 .AddTo(this);
             // プレイヤー削除
@@ -64,21 +77,108 @@ namespace Project.GGJ2025
                     zoomCamera2D.targets.Remove(playerInfo.Player.transform);
                 })
                 .AddTo(this);
-            var playerInfos = DataStore.Instance.PlayerInfos;
-            // プレイヤー情報変更監視登録
-            for (int index = 0, max = playerInfos.Count; index < max; index++)
+        }
+        
+        /// <summary>
+        /// ゲーム状態変更時の処理
+        /// </summary>
+        private void ChangeGameState(GameState state)
+        {
+            switch (state)
             {
-                var player = playerInfos[index];
-                
-                // HP変更監視
-                player.Hp
-                    .Skip(1)
-                    .Subscribe(hp =>
+                case GameState.Title:
+                    // タイトル画面
+                    break;
+                case GameState.Join:
+                    // プレイヤー登録画面
+                    DataStore.Instance.PlayerInfos.ForEach(playerInfo =>
                     {
-                        Debug.Log($"playerId:{player.PlayerId} Hp:{hp}");
-                    })
-                    .AddTo(this);
+                        // プレイヤー位置初期化
+                        playerInfo.Player.gameObject.transform.position = Vector3.zero;
+                    });
+                    break;
+                case GameState.Start:
+                    // ゲーム開始
+                    DataStore.Instance.PlayerInfos.ForEach(playerInfo =>
+                    {
+                        // プレイヤー位置ランダム
+                        var randPosition = new Vector3(Random.Range(-10f, 10f), 10f, 0f);
+                        playerInfo.Player.gameObject.transform.position = randPosition;
+                    });
+                    break;
+                case GameState.Spawn:
+                    // リスポーン
+                    DataStore.Instance.PlayerInfos.ForEach(playerInfo =>
+                    {
+                        // プレイヤー位置初期化
+                        playerInfo.Player.gameObject.transform.position = Vector3.zero;
+                    });
+                    break;
+                case GameState.Pause:
+                    // 一時停止
+                    break;
+                case GameState.End:
+                    // ゲーム終了
+                    DataStore.Instance.PlayerInfos.ForEach(playerInfo =>
+                    {
+                        // プレイヤー位置初期化
+                        playerInfo.Player.gameObject.transform.position = Vector3.zero;
+                    });
+                    break;
+                case GameState.Result:
+                    // リザルト
+                    DataStore.Instance.PlayerInfos.ForEach(playerInfo =>
+                    {
+                        // プレイヤー位置初期化
+                        playerInfo.Player.gameObject.transform.position = Vector3.zero;
+                    });
+                    break;
             }
+        }
+
+        /// <summary>
+        /// 監視イベント登録
+        /// </summary>
+        private void SetEvent(DataStore.PlayerInfo player)
+        {
+            // HP変更監視
+            player.Hp
+                .Skip(1)
+                .Subscribe(hp =>
+                {
+                    Debug.Log($"playerId:{player.PlayerId} Hp:{hp}");
+                })
+                .AddTo(player.Player.gameObject);
+                
+            // エリア変更監視
+            player.AState
+                .Skip(1)
+                .Subscribe(area =>
+                {
+                    var dataStore = DataStore.Instance;
+                    var playerInfos = dataStore.PlayerInfos;
+                    if (playerInfos.All(x => x.AState.Value == AreaState.StartPointArea))
+                    {
+                        // 全員スタートエリアにいる場合
+                        dataStore.GameState.Value = GameState.Start;
+                    }
+                    else if (playerInfos.All(x => x.AState.Value == AreaState.RetryPointArea))
+                    {
+                        // 全員リトライエリアにいる場合
+                        dataStore.GameState.Value = GameState.Spawn;
+                    }
+                    else if (playerInfos.All(x => x.AState.Value == AreaState.ReturnPointArea))
+                    {
+                        // 全員リターンエリアにいる場合
+                        dataStore.GameState.Value = GameState.Join;
+                    }
+                    else if (playerInfos.Any(x => x.AState.Value == AreaState.HelpPointArea))
+                    {
+                        // 誰かがヘルプエリアにいる場合
+                        dataStore.GameState.Value = GameState.Help;
+                    }
+                })
+                .AddTo(player.Player.gameObject);
         }
     }
 }

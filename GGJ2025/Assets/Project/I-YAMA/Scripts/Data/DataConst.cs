@@ -12,6 +12,8 @@ namespace Project.GGJ2025
     public enum PlayerState
     {
         None,
+        // 停止
+        Pause,
         // 登場
         Spawn,
         // リスポーン
@@ -20,6 +22,21 @@ namespace Project.GGJ2025
         Alive,
         // 死んでいる
         Death
+    }
+    
+    public enum AreaState
+    {
+        None,
+        // スタート
+        StartPointArea,
+        // ヘルプ中
+        HelpPointArea,
+        // もう一回
+        RetryPointArea,
+        // 戻る
+        ReturnPointArea,
+        // 死亡ゾーン
+        DeadZonePointArea,
     }
     
     /// <summary>
@@ -35,6 +52,7 @@ namespace Project.GGJ2025
     public enum GameState
     {
         Title,
+        Help,
         Join,
         Start,
         Spawn,

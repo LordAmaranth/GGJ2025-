@@ -10,6 +10,11 @@ TagManager:
   - Air
   - Weapon
   - Straw
+  - StartPointArea
+  - HelpPointArea
+  - RetryPointArea
+  - ReturnPointArea
+  - DeadZonePointArea
   layers:
   - Default
   - TransparentFX

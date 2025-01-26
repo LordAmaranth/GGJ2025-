@@ -18,7 +18,9 @@ namespace Project.GGJ2025
             // プレイヤーID 0-4
             public int PlayerId;
             // プレイヤー状態
-            public readonly SerializableReactiveProperty<PlayerState> State = new ();
+            public readonly SerializableReactiveProperty<PlayerState> PState = new ();
+            // エリア状態
+            public readonly SerializableReactiveProperty<AreaState> AState = new ();
             // HP
             public readonly SerializableReactiveProperty<int> Hp = new ();
             // スコア
@@ -31,7 +33,8 @@ namespace Project.GGJ2025
             {
                 Player = player;
                 PlayerId = playerId;
-                State.Value = PlayerState.None;
+                PState.Value = PlayerState.None;
+                AState.Value = AreaState.None;
                 Hp.Value = 3;
                 Score.Value = 0;
             }
@@ -101,6 +104,14 @@ namespace Project.GGJ2025
             return playerIds.Where(playerId => !assignedIds.Contains(playerId)).ToList();
         }
         
+        /// <summary>
+        /// プレイヤー情報取得
+        /// </summary>
+        private PlayerInfo GetPlayerInfo(Player player)
+        {
+            return PlayerInfos.FirstOrDefault(info => info.Player == player);
+        }
+        
         // -------- public function ---------
         
         /// <summary>
@@ -152,6 +163,22 @@ namespace Project.GGJ2025
             assignedIds.Remove(playerInfo.PlayerId);
             leftSubject.OnNext(playerInfo);
             PlayerInfos.Remove(playerInfo);
+        }
+        
+        /// <summary>
+        /// エリア別状態変更
+        /// </summary>
+        public void HitChangePlayerState(Player player, string hitAreaTag)
+        {
+            // Debug.Log($"HitChangePlayerState player:{player} {player} hitAreaTag:{hitAreaTag}");
+            var playerInfo = GetPlayerInfo(player);
+            if (playerInfo == null)
+            {
+                Debug.Log($"Info is not found");
+                return;
+            }
+            playerInfo.AState.Value = (AreaState)System.Enum.Parse(typeof(AreaState), hitAreaTag);;
+            // Debug.Log($"playerInfo.AState.Value:{playerInfo.AState.Value}");
         }
     }
 }
