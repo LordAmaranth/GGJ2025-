@@ -214,7 +214,7 @@ public class Player : MonoBehaviour {
 
         visualsRoot.Animator.ResetTrigger("Landed");
         visualsRoot.Animator.SetTrigger("Attack");
-        visualsRoot.AttackHitBox.gameObject.SetActive(true);
+        visualsRoot.AttackHitBox.enabled = true;
         soundAttack.Play();
         isAttacking = true;
         holdingBlowButton = true;
@@ -259,7 +259,7 @@ public class Player : MonoBehaviour {
             visualsRoot.Animator.SetBool("BlowAir", true);
         }
         isAttacking = false;
-        visualsRoot.AttackHitBox.gameObject.SetActive(false);
+        visualsRoot.AttackHitBox.enabled = false;
     }
 
     public void OnBlowAirStart() {
