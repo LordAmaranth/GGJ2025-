@@ -44,9 +44,9 @@ public class Player : MonoBehaviour {
     private void SetPlayerActiveAndResetState() {
         playerInput.SwitchCurrentActionMap("PlayerImmobile");
         playerInput.SwitchCurrentActionMap("Player");
+        visualsRoot.Weapon.SetActive(false);
+        visualsRoot.Straw.SetActive(false);
         visualsRoot.WindBox.enabled = false;
-        visualsRoot.AttackHitBox.enabled = false;
-        visualsRoot.BlowBubbleHitBox.enabled = false;
         visualsRoot.WindParticles.gameObject.SetActive(false);
         visualsRoot.Animator.SetBool("Walk", false);
         visualsRoot.Animator.SetBool("BlowAir", false);
@@ -214,7 +214,6 @@ public class Player : MonoBehaviour {
 
         visualsRoot.Animator.ResetTrigger("Landed");
         visualsRoot.Animator.SetTrigger("Attack");
-        visualsRoot.AttackHitBox.gameObject.SetActive(true);
         soundAttack.Play();
         isAttacking = true;
         holdingBlowButton = true;
@@ -222,7 +221,7 @@ public class Player : MonoBehaviour {
     public void OnBlowBubble(InputAction.CallbackContext context) {
         if (context.canceled) {
             isBlowingBubble = false;
-            visualsRoot.BlowBubbleHitBox.enabled = false;
+            visualsRoot.Straw.SetActive(false);
             return;
         }
 
@@ -231,7 +230,8 @@ public class Player : MonoBehaviour {
         }
 
         isBlowingBubble = true;
-        visualsRoot.BlowBubbleHitBox.enabled = true;
+        visualsRoot.Straw.SetActive(true);
+        // soundBlowBubbleStart.Play();
 
     }
 
@@ -257,7 +257,6 @@ public class Player : MonoBehaviour {
             visualsRoot.Animator.SetBool("BlowAir", true);
         }
         isAttacking = false;
-        visualsRoot.AttackHitBox.gameObject.SetActive(false);
     }
 
     public void OnBlowAirStart() {

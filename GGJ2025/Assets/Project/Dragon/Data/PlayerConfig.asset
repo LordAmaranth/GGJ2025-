@@ -21,7 +21,7 @@ MonoBehaviour:
   <WindStrength>k__BackingField: 25
   <KillHeight>k__BackingField: -1080
   <PlayerVisuals>k__BackingField:
-  - {fileID: 5855009698246555042, guid: 4fe09ec1f6c5831458d6bda502aae553, type: 3}
+  - {fileID: 6387528420456907421, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
   - {fileID: 516371209902614628, guid: abde550338d8ac7479ed2a12356e9581, type: 3}
   - {fileID: 4230529134709278027, guid: dbd76d7c51d42bc46b890ee270b30c3a, type: 3}
   - {fileID: 430781857313555609, guid: 9bed76fc039ed904987aa09bb6b29444, type: 3}
