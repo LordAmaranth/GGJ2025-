@@ -11,7 +11,12 @@ public class Player : MonoBehaviour {
 
     [SerializeField] private PlayerConfig config;
     [SerializeField] private Rigidbody2D myRigidBody;
+    [SerializeField] private PlayerInput playerInput;
     [SerializeField] private AudioSource[] soundJump;
+    [SerializeField] private AudioSource soundKO;
+    [SerializeField] private AudioSource soundTaunt1;
+    [SerializeField] private AudioSource soundTaunt2;
+    [SerializeField] private AudioSource soundTaunt3;
     [SerializeField] private List<Collider2D> windSources = new();
 
     private bool isAttacking;
@@ -20,6 +25,7 @@ public class Player : MonoBehaviour {
     private float movementHorizontalSpeed;
     private JumpState jumpState;
     private PlayerVisuals visualsRoot;
+    private bool playerIsImmobile = false;
 
     private void Awake() {
         GameObject a = Instantiate(config.PlayerVisuals[PlayerManager.playerId % config.PlayerVisuals.Length], transform);
@@ -27,6 +33,8 @@ public class Player : MonoBehaviour {
         PlayerManager.playerId++;
 
         visualsRoot.transform.localPosition = Vector3.zero;
+        playerInput.SwitchCurrentActionMap("PlayerImmobile");
+        playerInput.SwitchCurrentActionMap("Player");
         visualsRoot.Weapon.SetActive(false);
         visualsRoot.Straw.SetActive(false);
         visualsRoot.WindBox.enabled = false;
@@ -35,8 +43,15 @@ public class Player : MonoBehaviour {
     }
 
     void Update() {
-        if (transform.position.y < -30) {
-            transform.position = new(transform.position.x, 20);
+        if (playerIsImmobile) {
+            return;
+        }
+
+        if (transform.position.y < config.KillHeight) {
+            myRigidBody.Sleep();
+            playerInput.SwitchCurrentActionMap("PlayerImmobile");
+            playerIsImmobile = true;
+            soundKO.Play();
         }
 
         if (myRigidBody.linearVelocityY < config.FallSpeedThreshold) {
@@ -186,6 +201,23 @@ public class Player : MonoBehaviour {
         isBlowingBubble = true;
         visualsRoot.Straw.SetActive(true);
 
+    }
+
+    public void OnTaunt1(InputAction.CallbackContext context) {
+        if (context.performed) {
+            soundTaunt1.Play();
+        }
+    }
+    public void OnTaunt2(InputAction.CallbackContext context) {
+        if (context.performed) {
+            soundTaunt2.Play();
+        }
+    }
+
+    public void OnTaunt3(InputAction.CallbackContext context) {
+        if (context.performed) {
+            soundTaunt3.Play();
+        }
     }
 
     public void OnAttackFinished() {

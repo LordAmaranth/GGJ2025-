@@ -9,5 +9,6 @@ public class PlayerConfig : ScriptableObject {
     [field: SerializeField] public float MaxLandAngle { get; private set; } = 45;
     [field: SerializeField] public float FallSpeedThreshold { get; private set; } = -0.1f;
     [field: SerializeField] public float WindStrength { get; private set; } = -2f;
+    [field: SerializeField] public float KillHeight { get; private set; } = -30f;
     [field: SerializeField] public GameObject[] PlayerVisuals { get; private set; }
 }

@@ -756,6 +756,74 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "PlayerImmobile",
+            "id": "fac88b49-3b12-4679-bfdf-2a7669c795fe",
+            "actions": [
+                {
+                    "name": "MakeNoise1",
+                    "type": "Button",
+                    "id": "abc72ee3-82e0-4ae2-a573-e9d2c0cc6e74",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MakeNoise2",
+                    "type": "Button",
+                    "id": "94663a8f-ab38-4c07-b007-1df7a598e82d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MakeNoise3",
+                    "type": "Button",
+                    "id": "949f321a-9c14-4a78-a9bf-ea9ae5ed5f0c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a61a72a6-65ea-47d1-8de0-eebbf9301f9f",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MakeNoise1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f21fc923-6b59-417c-8c50-98a406c28332",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MakeNoise2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7dbb3fad-dd4c-4d6b-b2f8-ab301da5fe72",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MakeNoise3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

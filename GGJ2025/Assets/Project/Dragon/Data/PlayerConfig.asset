@@ -19,6 +19,7 @@ MonoBehaviour:
   <MaxLandAngle>k__BackingField: 70
   <FallSpeedThreshold>k__BackingField: -10
   <WindStrength>k__BackingField: 25
+  <KillHeight>k__BackingField: -30
   <PlayerVisuals>k__BackingField:
   - {fileID: 6387528420456907421, guid: ed3fd6e45ef30ab48a347ea1b83f1fc7, type: 3}
   - {fileID: 516371209902614628, guid: abde550338d8ac7479ed2a12356e9581, type: 3}
