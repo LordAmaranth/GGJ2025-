@@ -20,7 +20,8 @@ public class Player : MonoBehaviour {
     [SerializeField] private AudioSource soundTaunt2;
     [SerializeField] private AudioSource soundTaunt3;
     [SerializeField] private AudioSource soundBlowBubbleStart;
-    [SerializeField] private List<Collider2D> windSources = new();
+    [SerializeField] private ParticleSystem landBubbleParticles;
+    private List<Collider2D> windSources = new();
 
     private bool isAttacking;
     private bool holdingBlowButton;
@@ -126,6 +127,8 @@ public class Player : MonoBehaviour {
         float landAngle = Vector3.Angle(collision.GetContact(0).normal, Vector2.up);
         if (landAngle < config.MaxLandAngle) {
             ChangeJumpState(JumpState.Grounded);
+            landBubbleParticles.transform.position = collision.contacts[0].point;
+            landBubbleParticles.Play();
         }
     }
 
