@@ -9,7 +9,7 @@ public class BubbleSpawnerStart : MonoBehaviour {
 
     private float timer;
 
-    void Start() {
+    void OnEnable() {
         for (int i = 0; i < spawnCount; i++) {
             SpawnBubble();
         }
