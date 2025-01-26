@@ -64,7 +64,7 @@ public class UIObj : MonoBehaviour
         if (isJump)
         {
             isJump = false;
-            doJump();
+            doJump(1f, 10);
         }
     }
 

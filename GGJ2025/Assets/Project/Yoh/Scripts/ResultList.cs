@@ -10,16 +10,11 @@ using UnityEngine.SceneManagement;
 
 public class ResultList : MonoBehaviour
 {
-    private void OnEnable()
-    {
-
-    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     //
-    private void OnStart()
+    private void OnEnable()
     {
-        //
         foreach (Transform tr in gameObject.transform)
         {
             if (tr.gameObject.name == "Bg") continue;
@@ -78,6 +73,7 @@ public class ResultList : MonoBehaviour
     public IEnumerator makeResultStatus(DataStore.PlayerInfo pf, int rank)
     {
         var btn = getBtnResult(pf.PlayerId);
+        btn.SetActive(true);
 
         //rank
         btn.transform.Find("Ranks/Txt").GetComponent<Text>().text = rank.ToString();

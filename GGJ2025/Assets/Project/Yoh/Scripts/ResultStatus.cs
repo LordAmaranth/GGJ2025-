@@ -33,7 +33,8 @@ public class ResultStatus : MonoBehaviour
         foreach (int i in players)
         {
             int score = 100;
-            var btn = gameObject.transform.Find("CharaStatus0" + i);
+            var btn = gameObject.transform.Find("CharaStatus0" + i).transform.gameObject;
+            btn.SetActive(true);
 
             //image
             var path = "test/test.png";
