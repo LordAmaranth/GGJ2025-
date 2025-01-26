@@ -13,6 +13,8 @@ public class Player : MonoBehaviour {
     [SerializeField] private Rigidbody2D myRigidBody;
     [SerializeField] private PlayerInput playerInput;
     [SerializeField] private AudioSource[] soundJump;
+    [SerializeField] private AudioSource soundWind;
+    [SerializeField] private AudioSource soundAttack;
     [SerializeField] private AudioSource soundKO;
     [SerializeField] private AudioSource soundTaunt1;
     [SerializeField] private AudioSource soundTaunt2;
@@ -47,8 +49,7 @@ public class Player : MonoBehaviour {
             return;
         }
 
-        if (transform.position.y < config.KillHeight)
-        {
+        if (transform.position.y < config.KillHeight) {
             myRigidBody.Sleep();
             DisableControls();
             soundKO.Play();
@@ -92,10 +93,10 @@ public class Player : MonoBehaviour {
         }
     }
 
-    public void DisableControls()
-    {
+    public void DisableControls() {
         playerInput.SwitchCurrentActionMap("PlayerImmobile");
         playerIsImmobile = true;
+        OnBlowAirEnd();
     }
 
     public void ReenableControls() {
@@ -195,6 +196,7 @@ public class Player : MonoBehaviour {
 
         visualsRoot.Animator.ResetTrigger("Landed");
         visualsRoot.Animator.SetTrigger("Attack");
+        soundAttack.Play();
         isAttacking = true;
         holdingBlowButton = true;
     }
@@ -241,9 +243,11 @@ public class Player : MonoBehaviour {
     public void OnBlowAirStart() {
         visualsRoot.WindBox.enabled = true;
         visualsRoot.WindParticles.gameObject.SetActive(true);
+        soundWind.Play();
     }
     public void OnBlowAirEnd() {
         visualsRoot.WindBox.enabled = false;
         visualsRoot.WindParticles.gameObject.SetActive(false);
+        soundWind.Stop();
     }
 }
