@@ -5,13 +5,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class ResultList : MonoBehaviour
 {
-    //
     private void OnEnable()
     {
-
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -25,50 +25,74 @@ public class ResultList : MonoBehaviour
             tr.gameObject.SetActive(false);
         }
 
-        //DataStore.Instance.PlayerInfos
+        //
+        StartCoroutine(startResultList());
 
-        //Player情報に変化があったときに受け取る設定
-        DataStore.Instance.PlayerInfos.ForEach(x =>
+        //Player情報に変化があったときに受け取る設定→リザルトは不要か
+        if (false)
         {
-            x.Hp.Subscribe(hp =>
+            DataStore.Instance.PlayerInfos.ForEach(x =>
             {
-                makeResultStatusHp(x.PlayerId, hp);
-            })
-            .AddTo(this);
-            x.Score.Subscribe(score =>
-               makeResultStatusScore(x.PlayerId, score)
-            ) ;
-        });
+                x.Hp.Subscribe(hp =>
+                {
+                    makeResultStatusHp(x.PlayerId, hp);
+                })
+                .AddTo(this);
+                x.Score.Subscribe(score =>
+                   makeResultStatusScore(x.PlayerId, score)
+                ) ;
+            });
+        }
+    }
+
+    //
+    public void touchNext()
+    {
+        //シーン遷移はナシに
+        //SceneManager.LoadScene("GameScene");
     }
 
     //
     public IEnumerator startResultList()
     {
         //var charas
-        var players = new List<int>();//test
+        //var players = new List<int>();//test
+
+        //ソートしてランキング
+        var playerInfos = DataStore.Instance.PlayerInfos;
+        playerInfos.OrderByDescending(p => p.Score);
 
         //Object set
-        foreach (int i in players)
+        int rank = 1;
+        foreach (DataStore.PlayerInfo pf in playerInfos)
         {
-            yield return StartCoroutine(makeResultStatus(i));
-            yield return new WaitForSeconds(0.2f);
+            Debug.Log("rank:" + rank);
+            yield return StartCoroutine(makeResultStatus(pf, rank));
+            yield return new WaitForSeconds(1.2f);//test 0.2f
+            rank++;
         }
     }
 
     //
-    public IEnumerator makeResultStatus(int i)
+    public IEnumerator makeResultStatus(DataStore.PlayerInfo pf, int rank)
     {
-        int score = 100;
-        var btn = getBtnResult(i);
+        var btn = getBtnResult(pf.PlayerId);
+
+        //rank
+        btn.transform.Find("Ranks/Txt").GetComponent<Text>().text = rank.ToString();
 
         //image
         var path = "test/test.png";
         btn.transform.Find("Face").GetComponent<Image>().sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
 
+        //Score
+        btn.transform.Find("Scores/Txt").GetComponent<Text>().text = pf.Score.ToString() + "点";
+
         //item
         gameObject.transform.Find("Items/Item0 + i").gameObject.SetActive(true);
         GetComponent<Image>().sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
 
+        
         yield return null;
     }
 

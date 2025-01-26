@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using R3;
 using Project.GGJ2025;
+using System.Linq;
 
 
 public class TabCharaStatus : MonoBehaviour
@@ -14,13 +15,6 @@ public class TabCharaStatus : MonoBehaviour
 
     //
     private void OnEnable()
-    {
-        //
-
-    }
-
-    //
-    private void OnStart()
     {
         //PlayerèÓïÒÇ…ïœâªÇ™Ç†Ç¡ÇΩÇ∆Ç´Ç…éÛÇØéÊÇÈ
         DataStore.Instance.PlayerInfos.ForEach(x =>
@@ -40,20 +34,31 @@ public class TabCharaStatus : MonoBehaviour
     private void startTabCharaStatus()
     {
         //var charas
-        var players = new List<int>();//test
+        var players = DataStore.Instance.PlayerInfos;
 
         //Object set
-        foreach(int i in players)
+        int i = 1;
+        foreach (var pf in players)
         {
-            var btn = getPlayerObj(i);
+            var btn = getPlayerObj(pf.PlayerId);
 
             //image
-            var path = "test/test.png";
+            var path = "test/test.png";//TODO!Ç†Ç∆Ç≈ëfçﬁÇéwíË
             btn.transform.Find("Face").GetComponent<Image>().sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
+
+            //color TODO!!Ç◊ÇΩèëÇ´
+            var c = Color.red;
+            if (pf.PlayerId == 2) c = Color.blue;
+            if (pf.PlayerId == 3) c = Color.yellow;
+            if (pf.PlayerId == 4) c = Color.green;
+            if (pf.PlayerId == 5) c = Color.cyan;
+            btn.transform.Find("Face").GetComponent<Image>().color = c;
 
             //item
             gameObject.transform.Find("Items/Item0 + i").gameObject.SetActive(true);
             GetComponent<Image>().sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
+
+            i++;
         }
     }
 
