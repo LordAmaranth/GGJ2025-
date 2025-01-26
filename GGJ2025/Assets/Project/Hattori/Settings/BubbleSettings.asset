@@ -15,5 +15,6 @@ MonoBehaviour:
   maxScale: 7
   scaleIncreaseSpeed: 1
   upSpeed: 1
+  WindStrength: 500
   destroyHeight: 10
   destroyWidth: 20
