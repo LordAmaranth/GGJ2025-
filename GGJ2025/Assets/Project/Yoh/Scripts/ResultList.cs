@@ -87,7 +87,7 @@ public class ResultList : MonoBehaviour
             Debug.Log("rank:" + rank + " Score:" + pf.Score.Value);
             if (rank == 1) topId = pf.PlayerId;
             yield return StartCoroutine(makeResultStatus(pf, rank));
-            yield return new WaitForSeconds(1.0f);//test 0.2f
+            yield return new WaitForSeconds(0.7f);//test 0.2f
             rank++;
         }
         //勝者表示
