@@ -67,6 +67,8 @@ namespace Project.GGJ2025
         private List<int> playerIds = new List<int>();
         // 割り当て済みプレイヤーID
         private HashSet<int> assignedIds = new HashSet<int>();
+
+        public int helpIndex = 0;
         
         // 参加通知
         private Subject<PlayerInfo> joinSubject = new Subject<PlayerInfo>();

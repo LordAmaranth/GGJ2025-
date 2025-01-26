@@ -289,6 +289,7 @@ GameObject:
   - component: {fileID: 1619124355447279204}
   - component: {fileID: 4876419202135967732}
   - component: {fileID: 6616077533053685510}
+  - component: {fileID: 5581598674086815873}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -343,7 +344,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u3042\u305D\u3073\u65B9\n\u306B\u3083\u30FC"
+  m_text: "1/3\u30DA\u30FC\u30B8\u3081\n\u3042\u305D\u3073\u65B9\u306B\u3083\u30FC"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4082d5b444fa94ca1b0a6671aabe08be, type: 2}
   m_sharedMaterial: {fileID: 4059616807023441517, guid: 4082d5b444fa94ca1b0a6671aabe08be, type: 2}
@@ -414,3 +415,18 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5581598674086815873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7083754634819016675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 067fbe8d297b545e4ac00cead5e8a5f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultText1: "/3\u30DA\u30FC\u30B8\u3081"
+  defaultText2: "\u3042\u305D\u3073\u65B9\u306B\u3083\u30FC"
+  text: {fileID: 6616077533053685510}

@@ -21,7 +21,6 @@ namespace Project.GGJ2025
         public GameObject result;
         public GameObject[] helpWindow;
 
-        private int helpIndex = 0;
         private int rankCount = 0;
         
         private GameState oldGameState = GameState.Title;
@@ -260,11 +259,11 @@ namespace Project.GGJ2025
                     if (playerInfos.Any(x => x.AState.Value == AreaState.HelpPointArea))
                     {
                         // 誰かがヘルプエリアにいる場合
-                        helpWindow[helpIndex].SetActive(true);
-                        helpIndex++;
-                        if (helpIndex >= helpWindow.Length)
+                        helpWindow[DataStore.Instance.helpIndex].SetActive(true);
+                        DataStore.Instance.helpIndex++;
+                        if (DataStore.Instance.helpIndex >= helpWindow.Length)
                         {
-                            helpIndex = 0;
+                            DataStore.Instance.helpIndex = 0;
                         }
                     }
                     else
