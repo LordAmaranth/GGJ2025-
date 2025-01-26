@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: BubbleSettings_Speedy
   m_EditorClassIdentifier: 
   maxScale: 7
+  startMaxScale: 2
+  startMinScale: 1
   scaleIncreaseSpeed: 1
   upSpeed: 2
-  WindStrength: 500
+  WindStrength: 20
   destroyHeight: 100
   destroyWidth: 100
