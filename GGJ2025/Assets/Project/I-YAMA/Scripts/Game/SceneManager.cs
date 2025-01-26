@@ -20,6 +20,7 @@ namespace Project.GGJ2025
         public GameObject[] helpWindow;
 
         private int helpIndex = 0;
+        private int rankCount = 0;
         
         private GameState oldGameState = GameState.Title;
         private Vector2 gameStartPos = new Vector2(-10, 10);
@@ -110,6 +111,8 @@ namespace Project.GGJ2025
                         // 参加無効
                         playerInputManager.DisableJoining();
                     }
+                    // 順位リセット        
+                    rankCount = DataStore.Instance.PlayerInfos.Count;
                     // ゲーム開始
                     DataStore.Instance.PlayerInfos.ForEach(playerInfo =>
                     {
@@ -196,9 +199,9 @@ namespace Project.GGJ2025
                             zoomCamera2D.targets.Add(p.transform);
                             break;
                         case PlayerState.Death:
-                            // スコアリセット
-                            var count = DataStore.Instance.PlayerInfos.Count(x => x.PState.Value != PlayerState.Death);
-                            player.Score.Value = count;
+                            // ランク割当
+                            player.Rank.Value = rankCount;
+                            rankCount--;
                             
                             // 死亡
                             p.DisableControls();

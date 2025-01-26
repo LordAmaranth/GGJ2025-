@@ -25,6 +25,8 @@ namespace Project.GGJ2025
             public readonly SerializableReactiveProperty<int> Hp = new ();
             // スコア
             public readonly SerializableReactiveProperty<int> Score = new ();
+            // ランク
+            public readonly SerializableReactiveProperty<int> Rank = new ();
             // 入力デバイス
             public Transform Transform;
             public Player Player;
