@@ -108,7 +108,7 @@ public class ResultList : MonoBehaviour
         btn.transform.Find("Ranks/Txt").GetComponent<Text>().text = rank.ToString();
 
         //image
-        var path = "Sprites/hat_00" + pf.PlayerId + ".png";
+        var path = "Sprites/hat_00" + (pf.PlayerId + 1) + ".png";
         if(false) btn.transform.Find("Face").GetComponent<Image>().sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
 
         //Score
