@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 6994946837218728949, guid: cd02dcce839a8405e908f7da769e7f73, type: 3}
-  minY: 20
-  maxY: 5
-  minX: -10
-  maxX: -10
+  minY: 0
+  maxY: 50
+  minX: -50
+  maxX: -50
   minInterval: 10
   maxInterval: 30
