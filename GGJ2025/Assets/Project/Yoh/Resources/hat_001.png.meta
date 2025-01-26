@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7b779ba54104944759333e3af5e17bd2
+guid: 7df2108af9f93684a85b4ca9622f9178
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1985185172234273805
-    second: title_logo_0
+      213: -2238062306675814724
+    second: hat_001_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -97,7 +97,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: Android
+    buildTarget: WebGL
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -110,7 +110,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WebGL
+    buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -152,13 +152,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: title_logo_0
+      name: hat_001_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 800
-        height: 586
+        width: 216
+        height: 186
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -167,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d04856c656bcc8b10800000000000000
-      internalID: 1985185172234273805
+      spriteID: cbe8569903ec0f0e0800000000000000
+      internalID: -2238062306675814724
       vertices: []
       indices: 
       edges: []
@@ -187,7 +187,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      title_logo_0: 1985185172234273805
+      hat_001_0: -2238062306675814724
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

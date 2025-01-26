@@ -124,10 +124,10 @@ public class UIObj : MonoBehaviour
     public void doJump(float mysec = 0f, int mypower = 0)
     {
         //if (sec < 0) return;
-        var jumpSec = 1f;
+        var jumpSec = 2f;
         var jumpPower = 10f;
         var _baseLocalPos = transform.localPosition;
-        var jumpCnt = 1;
+        var jumpCnt = 20;
 
         //”’l‚Ìã‘‚«
         if (mysec > 0f) jumpSec = mysec;

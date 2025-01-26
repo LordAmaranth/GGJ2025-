@@ -22,6 +22,12 @@ public class ResultList : MonoBehaviour
             tr.gameObject.SetActive(false);
         }
 
+        var wins = gameObject.transform.parent.Find("WinnerObjs").gameObject;
+        foreach (Transform tr in wins.transform)
+        {
+            tr.gameObject.SetActive(false);
+        }
+
         //
         StartCoroutine(startResultList());
 
@@ -74,14 +80,20 @@ public class ResultList : MonoBehaviour
 
         //Object set
         int rank = 1;
+        int topId = 0;
         yield return new WaitForSeconds(1.0f);//First Wait
         foreach (DataStore.PlayerInfo pf in players)
         {
             Debug.Log("rank:" + rank + " Score:" + pf.Score.Value);
+            if (rank == 1) topId = pf.PlayerId;
             yield return StartCoroutine(makeResultStatus(pf, rank));
             yield return new WaitForSeconds(1.2f);//test 0.2f
             rank++;
         }
+        //勝者表示
+        var wins = gameObject.transform.parent.Find("WinnerObjs").gameObject;
+        wins.transform.Find("WinnerObj0" + topId).gameObject.SetActive(true);
+
         SEManager.Instance.Play(SEPath.DON_PUFF);
         SEManager.Instance.Play(SEPath.CLAP00);
     }
@@ -96,7 +108,7 @@ public class ResultList : MonoBehaviour
         btn.transform.Find("Ranks/Txt").GetComponent<Text>().text = rank.ToString();
 
         //image
-        var path = "test/test.png";
+        var path = "hat_00" + pf.PlayerId + ".png";
         btn.transform.Find("Face").GetComponent<Image>().sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
 
         //Score
