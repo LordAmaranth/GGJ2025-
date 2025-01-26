@@ -19,6 +19,9 @@ namespace Project.GGJ2025
         public GameObject join;
         public GameObject battle;
         public GameObject result;
+        public GameObject[] helpWindow;
+
+        private int helpIndex = 0;
         
         private GameState oldGameState = GameState.Title;
         private Vector2 gameStartPos = new Vector2(-10, 10);
@@ -38,7 +41,7 @@ namespace Project.GGJ2025
                     Debug.Log($"state:{state}");
                     // タイトルUI表示切替
                     title.SetActive(state == GameState.Title);
-                    join.SetActive(state == GameState.Join);
+                    join.SetActive(state == GameState.Join || state == GameState.Help);
                     battle.SetActive(state == GameState.Start || state == GameState.Spawn || state == GameState.Pause || state == GameState.End);
                     result.SetActive(state == GameState.Result);
 
@@ -226,10 +229,23 @@ namespace Project.GGJ2025
                         // 全員リターンエリアにいる場合
                         dataStore.GameState.Value = GameState.Join;
                     }
-                    else if (playerInfos.Any(x => x.AState.Value == AreaState.HelpPointArea))
+                    
+                    if (playerInfos.Any(x => x.AState.Value == AreaState.HelpPointArea))
                     {
                         // 誰かがヘルプエリアにいる場合
-                        dataStore.GameState.Value = GameState.Help;
+                        helpWindow[helpIndex].SetActive(true);
+                        helpIndex++;
+                        if (helpIndex >= helpWindow.Length)
+                        {
+                            helpIndex = 0;
+                        }
+                    }
+                    else
+                    {
+                        foreach (var o in helpWindow)
+                        {
+                            o.SetActive(false);
+                        }
                     }
 
                     if (area == AreaState.DeadZonePointArea && player.PState.Value != PlayerState.Death)
