@@ -98,6 +98,12 @@ namespace Project.GGJ2025
                     BGMManager.Instance.Play(BGMPath.MAIN2025);
                     break;
                 case GameState.Join:
+                    var bubbles = GameObject.FindObjectsByType<Bubble>(FindObjectsSortMode.InstanceID);
+                    foreach (var bubble in bubbles)
+                    {
+                        Destroy(bubble.gameObject);
+                    }
+                    
                     BGMManager.Instance.Play(BGMPath.MAIN2025);
                     if (!playerInputManager.joiningEnabled)
                     {
