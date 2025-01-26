@@ -170,7 +170,7 @@ namespace Project.GGJ2025
                     DataStore.Instance.PlayerInfos.ForEach(playerInfo =>
                     {
                         // プレイヤー位置初期化
-                        playerInfo.Player.gameObject.transform.position = Vector3.zero;
+                        playerInfo.Player.gameObject.transform.position = new Vector3(0f, -30f, 0f);
                         playerInfo.PState.Value = PlayerState.None;
                         // 操作復元
                         playerInfo.Player.ReenableControls();
