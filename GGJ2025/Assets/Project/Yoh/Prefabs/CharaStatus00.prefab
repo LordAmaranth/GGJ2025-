@@ -1304,7 +1304,7 @@ GameObject:
   - component: {fileID: 2220682547552272551}
   - component: {fileID: 7521451583382562268}
   m_Layer: 5
-  m_Name: Scores
+  m_Name: Hps
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
