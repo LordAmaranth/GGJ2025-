@@ -12,6 +12,7 @@ public class UIObj : MonoBehaviour
     public bool isShake;
     public bool isShakePuru;
     public bool isWait;
+    public bool isJump;
 
     //wait
     public float size;//waitベースサイズ
@@ -22,7 +23,6 @@ public class UIObj : MonoBehaviour
     public float shakeBig;
     public float shakeSmall;
     public float shakeSec;
-
 
     //
     private void OnEnable()
@@ -60,6 +60,11 @@ public class UIObj : MonoBehaviour
         {
             isWait = false;
             doWait();
+        }
+        if (isJump)
+        {
+            isJump = false;
+            doJump();
         }
     }
 
@@ -114,4 +119,60 @@ public class UIObj : MonoBehaviour
 
         var tween = spr.transform.DOScale(new Vector3(x, y, 1f), spdWait).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutQuad);
     }
+
+    //下から上へ　どんどん上にあがっていく不具合がある…
+    public void doJump(float mysec = 0f, int mypower = 0)
+    {
+        //if (sec < 0) return;
+        var jumpSec = 1f;
+        var jumpPower = 10f;
+        var _baseLocalPos = transform.localPosition;
+        var jumpCnt = 1;
+
+        //数値の上書き
+        if (mysec > 0f) jumpSec = mysec;
+        if (mypower > 0) jumpPower = mypower;
+
+        // ジャンプ前に毎回、基準座標へ戻しておく
+        transform.localPosition = _baseLocalPos;
+
+        var seq = DOTween.Sequence();
+        transform.DOLocalJump(
+            transform.localPosition,         // 移動終了地点
+            jumpPower,                       // ジャンプする力 30くらいがベースか. 50-100でも可
+            jumpCnt,                        // 移動終了までにジャンプする回数
+            jumpSec                        // アニメーション時間
+        )
+        //// 基準座標をターゲットにしてジャンプさせる
+        //// （上に飛んでまた同じ位置に戻ってくるようになる）
+        //transform.DOLocalJump(
+        //    _baseLocalPos,   // 終了後に着地する座標
+        //    jumpPower,       // ジャンプの頂点の高さ
+        //    numJumps,        // 何回バウンドするか
+        //    duration         // 時間
+        //)
+        .SetEase(Ease.OutQuad)
+        .OnComplete(() =>
+        {
+            // 念のため、最終的に位置を合わせておきたいなら
+            transform.localPosition = _baseLocalPos;
+        });
+    }
+
+    //
+    public void doCanvasAlpha(float a = 1f, float sec = 0.5f)
+    {
+        var cg = GetComponent<CanvasGroup>();
+        if (cg == null)
+        {
+            return;
+        }
+        DOTween.To(
+            () => cg.alpha,          // 何を対象にするのか
+            num => cg.alpha = num,   // 値の更新
+            a,                  // 最終的な値
+            sec                  // アニメーション時間
+        );
+    }
+
 }

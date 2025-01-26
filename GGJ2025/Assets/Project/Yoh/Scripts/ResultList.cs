@@ -12,6 +12,7 @@ public class ResultList : MonoBehaviour
 {
     private void OnEnable()
     {
+
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

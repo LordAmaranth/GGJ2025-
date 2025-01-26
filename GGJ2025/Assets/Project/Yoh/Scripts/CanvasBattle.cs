@@ -8,7 +8,7 @@ using Project.GGJ2025;
 using System.Linq;
 
 //
-public class TabCharaStatus : MonoBehaviour
+public class CanvasBattle : MonoBehaviour
 {
     //public L
     public List<GameObject> charaObjs;
