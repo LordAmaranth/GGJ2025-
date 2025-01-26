@@ -36,13 +36,26 @@ public class Player : MonoBehaviour {
         PlayerManager.playerId++;
 
         visualsRoot.transform.localPosition = Vector3.zero;
+        SetPlayerActiveAndResetState();
+    }
+
+
+    private void SetPlayerActiveAndResetState() {
         playerInput.SwitchCurrentActionMap("PlayerImmobile");
         playerInput.SwitchCurrentActionMap("Player");
         visualsRoot.Weapon.SetActive(false);
         visualsRoot.Straw.SetActive(false);
         visualsRoot.WindBox.enabled = false;
         visualsRoot.WindParticles.gameObject.SetActive(false);
+        visualsRoot.Animator.SetBool("Walk", false);
+        visualsRoot.Animator.SetBool("BlowAir", false);
+        visualsRoot.Animator.SetBool("BlowBubble", false);
+        visualsRoot.Animator.SetTrigger("Attack");
         ChangeJumpState(JumpState.Falling);
+        isAttacking = false;
+        holdingBlowButton = false;
+        isBlowingBubble = false;
+        playerIsImmobile = false;
     }
 
     void Update() {
@@ -102,7 +115,7 @@ public class Player : MonoBehaviour {
 
     public void ReenableControls() {
         playerInput.SwitchCurrentActionMap("Player");
-        playerIsImmobile = false;
+        SetPlayerActiveAndResetState();
     }
 
     void OnCollisionEnter2D(Collision2D collision) {
@@ -154,7 +167,7 @@ public class Player : MonoBehaviour {
             case JumpState.Falling:
                 visualsRoot.Animator.SetBool("Falling", true);
                 visualsRoot.Animator.SetBool("Jump", false);
-                visualsRoot.Animator.ResetTrigger("Jump");
+                visualsRoot.Animator.ResetTrigger("Landed");
                 break;
             default:
                 throw new System.Exception($"Unhandled jump state {newJumpState}!");
