@@ -231,7 +231,7 @@ public class Player : MonoBehaviour {
 
         isBlowingBubble = true;
         visualsRoot.Straw.SetActive(true);
-        soundBlowBubbleStart.Play();
+        // soundBlowBubbleStart.Play();
 
     }
 
