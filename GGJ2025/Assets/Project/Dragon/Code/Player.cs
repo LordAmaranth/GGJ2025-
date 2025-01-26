@@ -19,6 +19,7 @@ public class Player : MonoBehaviour {
     [SerializeField] private AudioSource soundTaunt1;
     [SerializeField] private AudioSource soundTaunt2;
     [SerializeField] private AudioSource soundTaunt3;
+    [SerializeField] private AudioSource soundBlowBubbleStart;
     [SerializeField] private List<Collider2D> windSources = new();
 
     private bool isAttacking;
@@ -213,6 +214,7 @@ public class Player : MonoBehaviour {
 
         isBlowingBubble = true;
         visualsRoot.Straw.SetActive(true);
+        soundBlowBubbleStart.Play();
 
     }
 
