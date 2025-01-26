@@ -223,6 +223,7 @@ public class Player : MonoBehaviour {
         if (context.canceled) {
             isBlowingBubble = false;
             visualsRoot.BlowBubbleHitBox.enabled = false;
+            visualsRoot.Animator.SetBool("BlowBubble", false);
             return;
         }
 
@@ -232,6 +233,7 @@ public class Player : MonoBehaviour {
 
         isBlowingBubble = true;
         visualsRoot.BlowBubbleHitBox.enabled = true;
+        visualsRoot.Animator.SetBool("BlowBubble", true);
 
     }
 
