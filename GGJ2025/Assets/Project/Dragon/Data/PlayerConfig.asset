@@ -22,6 +22,6 @@ MonoBehaviour:
   <KillHeight>k__BackingField: -1080
   <PlayerVisuals>k__BackingField:
   - {fileID: 5855009698246555042, guid: 4fe09ec1f6c5831458d6bda502aae553, type: 3}
-  - {fileID: 516371209902614628, guid: abde550338d8ac7479ed2a12356e9581, type: 3}
-  - {fileID: 4230529134709278027, guid: dbd76d7c51d42bc46b890ee270b30c3a, type: 3}
-  - {fileID: 430781857313555609, guid: 9bed76fc039ed904987aa09bb6b29444, type: 3}
+  - {fileID: 236737062330764183, guid: d4afc4a64bdd1fb419adc35350453343, type: 3}
+  - {fileID: 323980749554444158, guid: 2b89b19ebe7a8024cb3ff98ce573318e, type: 3}
+  - {fileID: 8339644122973661199, guid: f7677e0355010754f9a96191d0660fb4, type: 3}
