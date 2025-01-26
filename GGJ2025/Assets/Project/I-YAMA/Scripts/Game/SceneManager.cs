@@ -182,6 +182,7 @@ namespace Project.GGJ2025
                     {
                         case PlayerState.Spawn:
                             // 登場
+                            p.ReenableControls();
                             p.gameObject.SetActive(true);
                             var py = zoomCamera2D.transform.position.y;
                             player.Player.transform.position = new Vector3(Random.Range(gameStartPos.x, gameStartPos.y), py + 10f, 0f);
@@ -190,6 +191,7 @@ namespace Project.GGJ2025
                             break;
                         case PlayerState.Death:
                             // 死亡
+                            p.DisableControls();
                             // オブジェクト非表示 仮
                             // p.gameObject.SetActive(false);
                             // 死亡したらカメラ追従から外す
