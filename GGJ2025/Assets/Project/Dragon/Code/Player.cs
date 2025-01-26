@@ -85,6 +85,7 @@ public class Player : MonoBehaviour {
         if (movementHorizontalSpeed != 0) {
             visualsRoot.transform.localScale = new Vector2(movementHorizontalSpeed < 0 ? 1 : -1, 1);
             visualsRoot.WindParticles.transform.localScale = new Vector2(movementHorizontalSpeed < 0 ? 1 : -1, 1);
+            visualsRoot.WindParticles.transform.GetChild(0).localScale = new Vector2(movementHorizontalSpeed < 0 ? 1 : -1, 1);
         }
 
         visualsRoot.Animator.SetBool("Walk", movementHorizontalSpeed != 0 && jumpState == JumpState.Grounded);
