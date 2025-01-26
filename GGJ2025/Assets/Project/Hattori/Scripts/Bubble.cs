@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using KanKikuchi.AudioManager;
 
 public class Bubble : MonoBehaviour {
     private Animator animator;
@@ -96,10 +97,26 @@ public class Bubble : MonoBehaviour {
         if (other.gameObject.CompareTag("Straw")) {
             isAirColliding = true;
             animator.SetTrigger("IsAir");
+            SEManager.Instance.Play(
+                audioPath       : SEPath.BLOW_BUBBLE_LOOP, //再生したいオーディオのパス
+                volumeRate      : 0.8f,                //音量の倍率
+                delay           : 0,                //再生されるまでの遅延時間
+                pitch           : 1,                //ピッチ
+                isLoop          : true,             //ループ再生するか
+                callback        : null              //再生終了後の処理
+            );
         }
 
         // シャボン玉をプスする時の当たり判定
         if (other.gameObject.CompareTag("Weapon")) {
+            SEManager.Instance.Play(
+                audioPath       : SEPath.BLOW_BUBBLE_START, //再生したいオーディオのパス
+                volumeRate      : 0.8f,                //音量の倍率
+                delay           : 0,                //再生されるまでの遅延時間
+                pitch           : 1,                //ピッチ
+                isLoop          : false,             //ループ再生するか
+                callback        : null              //再生終了後の処理
+            );
             Destroy(gameObject);
         }
 
@@ -117,6 +134,7 @@ public class Bubble : MonoBehaviour {
         if (other.gameObject.CompareTag("Straw")) {
             isAirColliding = false;
             animator.SetTrigger("Idle");
+            SEManager.Instance.Stop(SEPath.BLOW_BUBBLE_LOOP);
         }
 
         if (other.CompareTag("Air") && windSources.Contains(other)) {
