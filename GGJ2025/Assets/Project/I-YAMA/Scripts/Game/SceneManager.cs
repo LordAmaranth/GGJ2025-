@@ -142,6 +142,9 @@ namespace Project.GGJ2025
                     {
                         // プレイヤー位置初期化
                         playerInfo.Player.gameObject.transform.position = Vector3.zero;
+                        playerInfo.PState.Value = PlayerState.None;
+                        // 操作復元
+                        playerInfo.Player.ReenableControls();
                     });
                     break;
             }
