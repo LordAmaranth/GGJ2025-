@@ -24,7 +24,7 @@ public class ResultList : MonoBehaviour
         //
         StartCoroutine(startResultList());
 
-        //Playerî•ñ‚É•Ï‰»‚ª‚ ‚Á‚½‚Æ‚«‚Éó‚¯æ‚éİ’è¨ƒŠƒUƒ‹ƒg‚Í•s—v‚©
+        //Playerï¿½ï¿½ï¿½É•Ï‰ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ‚ï¿½ï¿½Éó‚¯ï¿½ï¿½İ’è¨ï¿½ï¿½ï¿½Uï¿½ï¿½ï¿½gï¿½Í•sï¿½vï¿½ï¿½
         if (false)
         {
             DataStore.Instance.PlayerInfos.ForEach(x =>
@@ -44,7 +44,7 @@ public class ResultList : MonoBehaviour
     //
     public void touchNext()
     {
-        //ƒV[ƒ“‘JˆÚ‚ÍƒiƒV‚É
+        //ï¿½Vï¿½[ï¿½ï¿½ï¿½Jï¿½Ú‚Íƒiï¿½Vï¿½ï¿½
         //SceneManager.LoadScene("GameScene");
     }
 
@@ -54,7 +54,7 @@ public class ResultList : MonoBehaviour
         //var charas
         //var players = new List<int>();//test
 
-        //ƒ\[ƒg‚µ‚Äƒ‰ƒ“ƒLƒ“ƒO
+        //ï¿½\ï¿½[ï¿½gï¿½ï¿½ï¿½Äƒï¿½ï¿½ï¿½ï¿½Lï¿½ï¿½ï¿½O
         var playerInfos = DataStore.Instance.PlayerInfos;
         playerInfos.OrderByDescending(p => p.Score);
 
@@ -83,7 +83,7 @@ public class ResultList : MonoBehaviour
         btn.transform.Find("Face").GetComponent<Image>().sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
 
         //Score
-        btn.transform.Find("Scores/Txt").GetComponent<Text>().text = pf.Score.ToString() + "“_";
+        btn.transform.Find("Scores/Txt").GetComponent<Text>().text = pf.Score.ToString() + "ä½";
 
         //item
         gameObject.transform.Find("Items/Item0 + i").gameObject.SetActive(true);
