@@ -24,7 +24,7 @@ public class ResultList : MonoBehaviour
         //
         StartCoroutine(startResultList());
 
-        //Player���ɕω����������Ƃ��Ɏ󂯎��ݒ聨���U���g�͕s�v��
+        //
         if (false)
         {
             DataStore.Instance.PlayerInfos.ForEach(x =>
@@ -44,7 +44,6 @@ public class ResultList : MonoBehaviour
     //
     public void touchNext()
     {
-        //�V�[���J�ڂ̓i�V��
         //SceneManager.LoadScene("GameScene");
     }
 
@@ -54,15 +53,29 @@ public class ResultList : MonoBehaviour
         //var charas
         //var players = new List<int>();//test
 
-        //�\�[�g���ă����L���O
+        //order descend playerInfo
         var playerInfos = DataStore.Instance.PlayerInfos;
-        playerInfos.OrderByDescending(p => p.Score);
+
+        if(playerInfos.Count < 1)
+        {
+            Debug.LogError("No playerInfos");
+        }
+        
+        var playerInfosOrdered = playerInfos.OrderBy(p => p.Rank).ToList();
+        //playerInfos.Sort((a, b) => a.Rank - b.Rank);
+
+        //応急
+        var players = new List<DataStore.PlayerInfo>();
+        foreach(var pod in playerInfosOrdered)
+        {
+            players.Add(pod);
+        }
 
         //Object set
         int rank = 1;
-        foreach (DataStore.PlayerInfo pf in playerInfos)
+        foreach (DataStore.PlayerInfo pf in players)
         {
-            Debug.Log("rank:" + rank);
+            Debug.Log("rank:" + rank + " Score:" + pf.Score);
             yield return StartCoroutine(makeResultStatus(pf, rank));
             yield return new WaitForSeconds(1.2f);//test 0.2f
             rank++;

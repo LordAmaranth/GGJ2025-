@@ -16,6 +16,16 @@ public class CanvasBattle : MonoBehaviour
     //
     private void OnEnable()
     {
+        //
+        foreach (Transform tr in gameObject.transform)
+        {
+            if (tr.gameObject.name == "Bg") continue;
+            tr.gameObject.SetActive(false);
+        }
+
+        //‰‰ñ•\Ž¦
+        startTabCharaStatus();
+
         //Playerî•ñ‚É•Ï‰»‚ª‚ ‚Á‚½‚Æ‚«‚ÉŽó‚¯Žæ‚é
         DataStore.Instance.PlayerInfos.ForEach(x =>
         {
@@ -55,9 +65,13 @@ public class CanvasBattle : MonoBehaviour
             btn.transform.Find("Face").GetComponent<Image>().color = c;
 
             //item
-            gameObject.transform.Find("Items/Item0 + i").gameObject.SetActive(true);
-            GetComponent<Image>().sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
+            if(false) gameObject.transform.Find("Items/Item0 + i").gameObject.SetActive(true);
 
+            //Image
+            if (false)
+            {
+                GetComponent<Image>().sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
+            }
             i++;
         }
     }
@@ -73,7 +87,10 @@ public class CanvasBattle : MonoBehaviour
     public void setPlayerScore(int id, int score)
     {
         var btn = getPlayerObj(id);
-        btn.transform.Find("Sores/Txt").GetComponent<Text>().text = score.ToString();
+        if (false)
+        {
+            btn.transform.Find("Sores/Txt").GetComponent<Text>().text = score.ToString();
+        }
     }
     
 
