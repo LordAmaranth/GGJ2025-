@@ -19,7 +19,7 @@ public class RandomSpawner : MonoBehaviour
     public float minInterval = 1f;
     public float maxInterval = 5f;
 
-    void Start()
+    void OnEnable()
     {
         // ランダムな間隔でオブジェクトを生成するコルーチンを開始
         StartCoroutine(SpawnObjectsRandomly());
