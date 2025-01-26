@@ -1,6 +1,4 @@
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using GGJ.Common;
 using R3;
 using UnityEngine;
@@ -124,6 +122,8 @@ namespace Project.GGJ2025
                     // リスポーン
                     DataStore.Instance.PlayerInfos.ForEach(playerInfo =>
                     {
+                        // スコアリセット
+                        playerInfo.Score.Value = 0;
                         // プレイヤー位置初期化
                         playerInfo.Player.gameObject.transform.position = Vector3.zero;
                     });
@@ -196,6 +196,10 @@ namespace Project.GGJ2025
                             zoomCamera2D.targets.Add(p.transform);
                             break;
                         case PlayerState.Death:
+                            // スコアリセット
+                            var count = DataStore.Instance.PlayerInfos.Count(x => x.PState.Value != PlayerState.Death);
+                            player.Score.Value = count;
+                            
                             // 死亡
                             p.DisableControls();
                             // オブジェクト非表示 仮
