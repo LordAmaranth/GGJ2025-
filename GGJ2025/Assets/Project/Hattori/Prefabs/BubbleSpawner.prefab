@@ -47,9 +47,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubblePrefab: {fileID: 5410465032269475762, guid: 4e7bd4d7ebaec46708edbad0edc0b15b, type: 3}
-  spawnInterval: 1
-  spawnRangeX: 8
-  spawnHeight: -10
+  spawnInterval: 0.2
+  spawnRangeX: 80
+  spawnHeight: -35
   bubbleSettings: {fileID: 11400000, guid: 314c9844ac952496c86e9671d4468918, type: 2}
 --- !u!114 &4621320788961526079
 MonoBehaviour:
@@ -64,10 +64,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubblePrefab: {fileID: 5410465032269475762, guid: 4e7bd4d7ebaec46708edbad0edc0b15b, type: 3}
-  spawnInterval: 3
-  spawnRangeX: 5
-  spawnHeight: -12
-  bubbleSettings: {fileID: 11400000, guid: b8ff11096dc964ab995b194892c5beb3, type: 2}
+  spawnInterval: 0.5
+  spawnRangeX: 1
+  spawnHeight: -30
+  bubbleSettings: {fileID: 11400000, guid: 314c9844ac952496c86e9671d4468918, type: 2}
 --- !u!114 &7834256612708717393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,16 +75,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5746046067093265339}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9faf6020d4a124954896df2d644d67f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bubblePrefab: {fileID: 5410465032269475762, guid: 4e7bd4d7ebaec46708edbad0edc0b15b, type: 3}
-  spawnInterval: 2
-  spawnRangeX: 8
-  spawnHeight: -9
-  bubbleSettings: {fileID: 11400000, guid: d186fe5a61295431eaba00cd5dd24d21, type: 2}
+  spawnInterval: 5
+  spawnRangeX: 15
+  spawnHeight: -10
+  bubbleSettings: {fileID: 11400000, guid: 314c9844ac952496c86e9671d4468918, type: 2}
 --- !u!1 &6261730829502519006
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubblePrefab: {fileID: 5410465032269475762, guid: 4e7bd4d7ebaec46708edbad0edc0b15b, type: 3}
-  spawnCount: 10
+  spawnCount: 20
   spawnRangeX: 5
   spawnHeight: -5
   bubbleSettings: {fileID: 11400000, guid: 314c9844ac952496c86e9671d4468918, type: 2}

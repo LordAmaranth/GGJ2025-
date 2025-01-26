@@ -14,46 +14,69 @@ public class Bubble : MonoBehaviour {
 
     void Start() {
         animator = GetComponent<Animator>();
-        originalScale = transform.localScale;
+
+        // 最初のサイズをランダムに設定
+        float randomScale = Random.Range(settings.startMinScale, settings.startMaxScale); // ランダムなスケールを生成
+        transform.localScale = Vector3.one * randomScale; // ランダムスケールを適用
+        originalScale = transform.localScale; // 初期スケールを保存
+
+        // ランダムスケールに基づいて初期質量を計算
+        myRigidBody.mass = CalculateMass(randomScale);
     }
 
     void Update() {
+        // スケールに基づいて速度を計算
+        float scaleFactor = 1 / transform.localScale.x; // スケールが大きいほど速度が小さくなる
+        float adjustedSpeed = settings.upSpeed * scaleFactor;
+
         // 上方向に移動
-        transform.Translate(Vector3.up * settings.upSpeed * Time.deltaTime);
+        transform.Translate(Vector3.up * adjustedSpeed * Time.deltaTime);
 
         // Airが当たっている間、スケールを大きくする
         if (isAirColliding && transform.localScale.x < settings.maxScale) {
             transform.localScale += Vector3.one * settings.scaleIncreaseSpeed * Time.deltaTime;
+
+            // 質量をスケールに応じて増やす
+            myRigidBody.mass = CalculateMass(transform.localScale.x);
         }
 
         // 最大スケールを超えないように制限
         if (transform.localScale.x > settings.maxScale) {
             transform.localScale = Vector3.one * settings.maxScale;
+
+            // 質量を最大スケールに対応する値に設定
+            myRigidBody.mass = CalculateMass(settings.maxScale);
         }
 
-
+        // 風の影響を受ける処理
         for (int i = windSources.Count - 1; i >= 0; i--) {
             Collider2D windSource = windSources[i];
             if (windSource.enabled) {
                 int directionMultiplier = 0;
                 if (windSource.transform.position.x < transform.position.x) {
                     directionMultiplier = 1;
-                }
-                else if (windSource.transform.position.x > transform.position.x) {
+                } else if (windSource.transform.position.x > transform.position.x) {
                     directionMultiplier = -1;
                 }
                 myRigidBody.AddForceX(settings.WindStrength * directionMultiplier);
-            }
-            else {
+            } else {
                 windSources.Remove(windSource);
             }
         }
-        
+
         // 一定の高さまたは横方向の限界を超えたらDestroy
         if (transform.position.y > settings.destroyHeight || Mathf.Abs(transform.position.x) > settings.destroyWidth) {
             Destroy(gameObject);
         }
     }
+
+
+// 質量を計算するメソッド
+    private float CalculateMass(float scale) {
+        // 質量をスケールの3乗に比例させる（球体の体積を考慮）
+        return 3.14f * Mathf.Pow(scale / originalScale.x, 3);
+    }
+
 
     private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Player")) {

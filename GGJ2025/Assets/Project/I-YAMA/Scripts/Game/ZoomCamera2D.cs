@@ -56,6 +56,9 @@ namespace Project.GGJ2025
             if (target.max == null)
             {
                 var tPosition = new Vector3(targets[0].position.x, targets[0].position.y + offset.y, defaultposition.z);
+                var aspect1 = _camera.aspect;
+                tPosition.x = Mathf.Clamp(tPosition.x, minBounds.x + defaultOrthographicSize * aspect1, maxBounds.x - defaultOrthographicSize * aspect1);
+                tPosition.y = Mathf.Clamp(tPosition.y, minBounds.y + defaultOrthographicSize, maxBounds.y - defaultOrthographicSize);
                 transform.position = Vector3.SmoothDamp(transform.position, tPosition, ref velocity, soloSmoothTime);
                 return;
             }

@@ -143,6 +143,7 @@ namespace Project.GGJ2025
                     });
                     break;
                 case GameState.Result:
+                    zoomCamera2D.targets.Clear();
                     // リザルト
                     DataStore.Instance.PlayerInfos.ForEach(playerInfo =>
                     {
@@ -151,6 +152,8 @@ namespace Project.GGJ2025
                         playerInfo.PState.Value = PlayerState.None;
                         // 操作復元
                         playerInfo.Player.ReenableControls();
+                        // カメラ追従再登録
+                        zoomCamera2D.targets.Add(playerInfo.Player.transform);
                     });
                     break;
             }
