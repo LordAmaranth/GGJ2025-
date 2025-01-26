@@ -108,11 +108,11 @@ public class ResultList : MonoBehaviour
         btn.transform.Find("Ranks/Txt").GetComponent<Text>().text = rank.ToString();
 
         //image
-        var path = "hat_00" + pf.PlayerId + ".png";
-        btn.transform.Find("Face").GetComponent<Image>().sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
+        var path = "Sprites/hat_00" + pf.PlayerId + ".png";
+        if(false) btn.transform.Find("Face").GetComponent<Image>().sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
 
         //Score
-        btn.transform.Find("Scores/Txt").GetComponent<Text>().text = pf.Score.Value.ToString() + "位";
+        btn.transform.Find("Scores/Txt").GetComponent<Text>().text = (1000 - (rank * 200)).ToString();//pf.Score.Value.ToString() + "位";
 
         //item
         // gameObject.transform.Find("Items/Item0 + i").gameObject.SetActive(true);
