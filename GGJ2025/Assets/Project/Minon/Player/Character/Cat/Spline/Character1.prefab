@@ -10,8 +10,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5855009698246555042, guid: 4fe09ec1f6c5831458d6bda502aae553, type: 3}
       propertyPath: m_Name
-      value: Character Variant
+      value: Character1
       objectReference: {fileID: 0}
+    - target: {fileID: 6056712774436440391, guid: 4fe09ec1f6c5831458d6bda502aae553, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2595862803844191866, guid: eb7247fc8ffbf9645b824102c85eeb1d, type: 3}
     - target: {fileID: 7821227526633455209, guid: 4fe09ec1f6c5831458d6bda502aae553, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.6847167
