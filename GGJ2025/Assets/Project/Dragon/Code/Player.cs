@@ -47,10 +47,10 @@ public class Player : MonoBehaviour {
             return;
         }
 
-        if (transform.position.y < config.KillHeight) {
+        if (transform.position.y < config.KillHeight)
+        {
             myRigidBody.Sleep();
-            playerInput.SwitchCurrentActionMap("PlayerImmobile");
-            playerIsImmobile = true;
+            DisableControls();
             soundKO.Play();
         }
 
@@ -90,6 +90,17 @@ public class Player : MonoBehaviour {
                 windSources.Remove(windSource);
             }
         }
+    }
+
+    public void DisableControls()
+    {
+        playerInput.SwitchCurrentActionMap("PlayerImmobile");
+        playerIsImmobile = true;
+    }
+
+    public void ReenableControls() {
+        playerInput.SwitchCurrentActionMap("Player");
+        playerIsImmobile = false;
     }
 
     void OnCollisionEnter2D(Collision2D collision) {

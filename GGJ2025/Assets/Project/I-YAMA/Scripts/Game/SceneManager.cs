@@ -21,6 +21,7 @@ namespace Project.GGJ2025
         public GameObject result;
         
         private GameState oldGameState = GameState.Title;
+        private Vector2 gameStartPos = new Vector2(-10, 10);
         
         /// <inheritdoc/>>
         protected override void Init()
@@ -90,6 +91,11 @@ namespace Project.GGJ2025
                     // タイトル画面
                     break;
                 case GameState.Join:
+                    if (!playerInputManager.joiningEnabled)
+                    {
+                        // 参加有効
+                        playerInputManager.EnableJoining();
+                    }
                     // プレイヤー登録画面
                     DataStore.Instance.PlayerInfos.ForEach(playerInfo =>
                     {
@@ -98,11 +104,16 @@ namespace Project.GGJ2025
                     });
                     break;
                 case GameState.Start:
+                    if (playerInputManager.joiningEnabled)
+                    {
+                        // 参加無効
+                        playerInputManager.DisableJoining();
+                    }
                     // ゲーム開始
                     DataStore.Instance.PlayerInfos.ForEach(playerInfo =>
                     {
                         // プレイヤー位置ランダム
-                        var randPosition = new Vector3(Random.Range(-10f, 10f), 10f, 0f);
+                        var randPosition = new Vector3(Random.Range(gameStartPos.x, gameStartPos.y), 10f, 0f);
                         playerInfo.Player.gameObject.transform.position = randPosition;
                     });
                     break;
@@ -150,6 +161,44 @@ namespace Project.GGJ2025
                 })
                 .AddTo(player.Player.gameObject);
                 
+            // 状態変更監視
+            player.PState
+                .Skip(1)
+                .Subscribe(state =>
+                {
+                    var dataStore = DataStore.Instance;
+                    var playerInfos = dataStore.PlayerInfos;
+                    // 全員死亡したらゲーム終了 リザルト遷移
+                    if (playerInfos.All(x => x.PState.Value == PlayerState.Death))
+                    {
+                        // 全員死亡
+                        dataStore.GameState.Value = GameState.Result;
+                        return;
+                    }
+                    
+                    Debug.Log($"playerId:{player.PlayerId} PState:{state}");
+                    var p = player.Player;
+                    switch (state)
+                    {
+                        case PlayerState.Spawn:
+                            // 登場
+                            p.gameObject.SetActive(true);
+                            var py = zoomCamera2D.transform.position.y;
+                            player.Player.transform.position = new Vector3(Random.Range(gameStartPos.x, gameStartPos.y), py + 10f, 0f);
+                            // カメラ追従追加
+                            zoomCamera2D.targets.Add(p.transform);
+                            break;
+                        case PlayerState.Death:
+                            // 死亡
+                            // オブジェクト非表示 仮
+                            // p.gameObject.SetActive(false);
+                            // 死亡したらカメラ追従から外す
+                            zoomCamera2D.targets.Remove(p.transform);
+                            break;
+                    }
+                })
+                .AddTo(player.Player.gameObject);
+                
             // エリア変更監視
             player.AState
                 .Skip(1)
@@ -176,6 +225,12 @@ namespace Project.GGJ2025
                     {
                         // 誰かがヘルプエリアにいる場合
                         dataStore.GameState.Value = GameState.Help;
+                    }
+
+                    if (area == AreaState.DeadZonePointArea && player.PState.Value != PlayerState.Death)
+                    {
+                        // 死亡エリアに入った場合
+                        player.PState.Value = PlayerState.Death;
                     }
                 })
                 .AddTo(player.Player.gameObject);
