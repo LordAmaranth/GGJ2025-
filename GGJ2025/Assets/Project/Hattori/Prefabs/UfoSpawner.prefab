@@ -50,4 +50,4 @@ MonoBehaviour:
   minX: -50
   maxX: -50
   minInterval: 10
-  maxInterval: 30
+  maxInterval: 60
