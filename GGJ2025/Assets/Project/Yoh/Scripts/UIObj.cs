@@ -175,4 +175,18 @@ public class UIObj : MonoBehaviour
         );
     }
 
+    //αを徐々に変える
+    public void setAlpha(float a, float sec)
+    {
+        Color c = GetComponent<Image>().color;
+        var img = GetComponent<Image>();
+        DOTween.ToAlpha(
+            () => img.color,
+            color => img.color = color,
+            a, // 目標値
+            sec // 所要時間
+        );
+        //return self;
+    }
+
 }

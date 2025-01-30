@@ -11,15 +11,29 @@ using KanKikuchi.AudioManager;
 
 public class ResultList : MonoBehaviour
 {
-
+    [SerializeField] private PlayerConfig playerConfig;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    public GameObject cnvResult;
+    public GameObject panel;
+
     //
     private void OnEnable()
     {
+        //panel
+        setCanvasAlpha(1f, 0.2f);
+        setPanelAlpha(0.3f, 0f);
+
+        //
         foreach (Transform tr in gameObject.transform)
         {
             if (tr.gameObject.name == "Bg") continue;
             tr.gameObject.SetActive(false);
+            var face = tr.gameObject.transform.Find("Face").transform.gameObject;
+            foreach (Transform trr in face.transform)
+            {
+                GameObject.Destroy(trr.gameObject);
+            }
         }
 
         var wins = gameObject.transform.parent.Find("WinnerObjs").gameObject;
@@ -49,6 +63,15 @@ public class ResultList : MonoBehaviour
     }
 
     //
+    public void touchTest()
+    {
+        //var parent = this.gameObject;//btn.transform.Find("Face");
+        //Instantiate(
+        //    playerConfig.PlayerVisuals[pf.PlayerId % playerConfig.PlayerVisuals.Length],
+        //    parent);
+    }
+
+    //
     public void touchNext()
     {
         //SceneManager.LoadScene("GameScene");
@@ -57,9 +80,6 @@ public class ResultList : MonoBehaviour
     //
     public IEnumerator startResultList()
     {
-        //var charas
-        //var players = new List<int>();//test
-
         //order descend playerInfo
         var playerInfos = DataStore.Instance.PlayerInfos;
 
@@ -68,24 +88,19 @@ public class ResultList : MonoBehaviour
             Debug.LogError("No playerInfos");
         }
         
+        //Rank 昇順。
         var playerInfosOrdered = playerInfos.OrderBy(p => p.Rank.Value).ToList();
         //playerInfos.Sort((a, b) => a.Rank - b.Rank);
 
-        //応急
-        var players = new List<DataStore.PlayerInfo>();
-        foreach(var pod in playerInfosOrdered)
-        {
-            players.Add(pod);
-        }
-
         //Object set
-        int rank = 1;
+        int rank = 1;//Rank.Valueが正しくなさげなので応急処置。0位,2位となってる？
         int topId = 0;
         yield return new WaitForSeconds(1.0f);//First Wait
-        foreach (DataStore.PlayerInfo pf in players)
+        foreach (DataStore.PlayerInfo pf in playerInfosOrdered)
         {
-            Debug.Log("rank:" + rank + " Score:" + pf.Score.Value);
-            if (rank == 1) topId = pf.PlayerId;
+            var pid = pf.PlayerId;
+            Debug.Log("Rank:" + pf.Rank.Value + " PlayerId:" + pid);
+            if (rank == 1) topId = pid;
             yield return StartCoroutine(makeResultStatus(pf, rank));
             yield return new WaitForSeconds(0.7f);//test 0.2f
             rank++;
@@ -96,30 +111,61 @@ public class ResultList : MonoBehaviour
 
         SEManager.Instance.Play(SEPath.DON_PUFF);
         SEManager.Instance.Play(SEPath.CLAP00);
+
+        //背景の色を無くす
+        //yield return new WaitForSeconds(1.0f);
+        setPanelAlpha(0f, 0.5f);
+        yield return new WaitForSeconds(3.0f);
+        setCanvasAlpha(0.4f, 1.0f);
+
+        //ボタンの色を薄く
+        foreach(Transform tr in gameObject.transform)
+        {
+            if(tr.gameObject.name == "Bg") continue;
+            tr.Find("Bg").GetComponent<Image>().enabled = false;
+        }
+
     }
 
     //
     public IEnumerator makeResultStatus(DataStore.PlayerInfo pf, int rank)
     {
-        var btn = getBtnResult(pf.PlayerId);
+        //var rank = pf.Rank.Value;
+        var btn = getBtnResult(rank - 1);// pf.PlayerId);
         btn.SetActive(true);
+        btn.transform.Find("Bg").GetComponent<Image>().enabled = true;
 
         //rank
         btn.transform.Find("Ranks/Txt").GetComponent<Text>().text = rank.ToString();
 
         //image
-        var path = "hat_00" + (pf.PlayerId + 1);// + ".png";
-        Debug.Log("pid:" + pf.PlayerId + " path:" + path);
-        if(true) btn.transform.Find("Face").GetComponent<Image>().sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
+        if (true)
+        {
+            //var path = "hat_00" + (pf.PlayerId + 1);// + ".png";
+            var path = "Chara0" + pf.PlayerId.ToString();
+            //Debug.Log("pid:" + pf.PlayerId + " path:" + path);
+            if(true) btn.transform.Find("Face").GetComponent<Image>().sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
+        }
+
+        //new
+        if (false)
+        {
+            var parent = btn.transform.Find("Face");
+            Instantiate(
+                playerConfig.PlayerVisuals[pf.PlayerId % playerConfig.PlayerVisuals.Length],
+                parent);
+        }
 
         //Score
         btn.transform.Find("Scores/Txt").GetComponent<Text>().text = (1000 - (rank * 200)).ToString();//pf.Score.Value.ToString() + "位";
 
+        //color TODO!!べた書き
+        //btn.transform.Find("Face").GetComponent<Image>().color = c;
+
         //item
         // gameObject.transform.Find("Items/Item0 + i").gameObject.SetActive(true);
-        GetComponent<Image>().sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
+        //GetComponent<Image>().sprite = Resources.Load(path, typeof(Sprite)) as Sprite;
 
-        
         yield return null;
     }
 
@@ -144,6 +190,19 @@ public class ResultList : MonoBehaviour
         btn.transform.Find("Sores/Txt").GetComponent<Text>().text = score.ToString();
     }
 
+    //
+    public void setPanelAlpha(float a, float sec)
+    {
+        panel.GetComponent<UIObj>().setAlpha(a, sec);
+        //Color color = panel.GetComponent<Image>().color;
+        //color.a = a;
+        //panel.GetComponent<Image>().color = color;        
+    }
 
+    //
+    public void setCanvasAlpha(float a, float sec)
+    {
+        cnvResult.GetComponent<UIObj>().doCanvasAlpha(a, sec);
+    }
 
 }
