@@ -803,6 +803,17 @@
                 },
                 {
                     "name": "",
+                    "id": "91d12c74-9de4-42ac-9f46-4d122f0d7d2f",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MakeNoise1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "f21fc923-6b59-417c-8c50-98a406c28332",
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "",
@@ -814,8 +825,30 @@
                 },
                 {
                     "name": "",
+                    "id": "20a2df35-4385-4f60-8c46-69b849f7f5d8",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MakeNoise2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "7dbb3fad-dd4c-4d6b-b2f8-ab301da5fe72",
                     "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MakeNoise3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d7d5ec87-b8b4-4f6b-b141-2da49cf68687",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
